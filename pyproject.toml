@@ -1,0 +1,7 @@
+[project]
+name = "devtask"
+version = "0.1.0"
+description = "Personal Project for studies"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
