@@ -17,3 +17,8 @@ Read Tasks -
 
 Markasdone Tasks -
 * Isso aqui foi bem complicado. Tentei muita coisa, pesquisei- mesmo sem resultados, e finalmente pensei em algo. Eu abri o dados.json para ver como era os dados, né? Ai eu vi que era um dicionário 'tasks' com uma lista de outros dicionários, ai ficou fácil.
+
+
+Update tasks -
+* Markasdone só que para nomes, já que, por hora, é a única coisa alterável.
+* Eu adicionei uma nova função chamada check(), ela serve para garantir que o ID exista.

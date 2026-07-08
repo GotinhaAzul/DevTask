@@ -91,7 +91,7 @@ def main():
         nome = str(input("Nome da tarefa a criar: "))
         arquivo = open("dados.json", "r")
         id = 0
-        for i in arquivo:  # Isso aqui não é uma boa opção. IDs ficam estranhos.
+        for i in arquivo:  # IDs ficam estranhos, mas nunca iguais.
             id += 1
         create(nome, id)
 
@@ -111,6 +111,7 @@ def main():
 
     elif esc == "4":
         pass
+
     else:
         print("Opção inválida!")
 
