@@ -22,11 +22,11 @@ A sua jornada é a seguinte:
 * [x] Criar menu interativo
 * [x] Criar tarefa
 * [x] Listar tarefas
-* [ ] Editar tarefa
+* [x] Editar tarefa
 * [ ] Excluir tarefa
 * [x] Marcar tarefa como concluída
 * [x] Salvar em JSON
-* [ ] Carregar tarefas ao iniciar
+* [x] Carregar tarefas ao iniciar
 * [ ] Validação de entradas
 * [ ] Tratamento de exceções
 * [ ] Sistema de logs
