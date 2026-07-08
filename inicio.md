@@ -19,7 +19,7 @@ A sua jornada é a seguinte:
 # Épico 1 — MVP (CLI)
 
 * [x] Configurar ambiente virtual (uv, git init, GitHub)
-* [ ] Criar menu interativo
+* [x] Criar menu interativo
 * [ ] Criar tarefa
 * [ ] Listar tarefas
 * [ ] Editar tarefa

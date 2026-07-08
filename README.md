@@ -6,3 +6,7 @@ Prólogo -
 
 Planejamento Épico 1 - 
 * Certo.. primeiro eu vou estudar em como editar JSONs com python, ai fazer o CRUD com eles. Dar um print em todas as opções primeiro, depois vejo se devo melhorar isso.
+
+Create Tasks -
+* Foi mais chato do que pensava. Ler e editar Jsons, principalmente para dar append, é muito chato. No fim, fiz o seguinte: Abre o dados.json e le o que tem lá, então, coloca em uma lista. Vê o novo dado a adicionar, adiciona na lista e então dá overwrite no dados.py
+* Eu resolvi fazer isso ao invés de usar o append do open() por que vai facilitar meu trabalho futuramente na hora de ler as tasks e edita-las.
