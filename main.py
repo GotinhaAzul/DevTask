@@ -68,7 +68,7 @@ def markasdone(taskid):  # Alterna Done entre True ou False
 
     for i in data["tasks"]:  # Filtra data até achar desejado, então atualiza
         if i["id"] == taskid:
-            if i["id"] == False:
+            if i["done"] == False:
                 i["done"] = True
             else:
                 i["done"] = False
