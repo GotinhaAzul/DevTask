@@ -10,3 +10,6 @@ Planejamento Épico 1 -
 Create Tasks -
 * Foi mais chato do que pensava. Ler e editar Jsons, principalmente para dar append, é muito chato. No fim, fiz o seguinte: Abre o dados.json e le o que tem lá, então, coloca em uma lista. Vê o novo dado a adicionar, adiciona na lista e então dá overwrite no dados.py
 * Eu resolvi fazer isso ao invés de usar o append do open() por que vai facilitar meu trabalho futuramente na hora de ler as tasks e edita-las.
+
+Read Tasks - 
+* Foi melhor do que pensava. Enquanto programava essa, percebi que eu teria de fazer alguma forma de o usuário marcar uma task como Done, então... vou ver isso aí agora. Eu praticamente repliquei o que fiz em Create Tasks e fiz uma busca em dicionário que já havia feito em exercícios antes.
