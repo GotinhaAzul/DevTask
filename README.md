@@ -13,3 +13,7 @@ Create Tasks -
 
 Read Tasks - 
 * Foi melhor do que pensava. Enquanto programava essa, percebi que eu teria de fazer alguma forma de o usuário marcar uma task como Done, então... vou ver isso aí agora. Eu praticamente repliquei o que fiz em Create Tasks e fiz uma busca em dicionário que já havia feito em exercícios antes.
+
+
+Markasdone Tasks -
+* Isso aqui foi bem complicado. Tentei muita coisa, pesquisei- mesmo sem resultados, e finalmente pensei em algo. Eu abri o dados.json para ver como era os dados, né? Ai eu vi que era um dicionário 'tasks' com uma lista de outros dicionários, ai ficou fácil.

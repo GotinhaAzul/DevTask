@@ -27,6 +27,20 @@ def read(id=None):
                 print(i)
 
 
+def markasdone(taskid):
+    with open("dados.json", "r") as file:  # Abre o arquivo como "file"
+        data = json.load(file)
+
+    for i in data["tasks"]:  # Filtra data até achar desejado, então atualiza
+        if i["id"] == taskid:
+            i["done"] = True
+        else:
+            continue
+
+    with open("dados.json", "w") as file:  # Salva os dados atualizados
+        json.dump(data, file, indent=4)
+
+
 def main():
     print("1. Criar Tarefa")  # Crie tarefas
     print("2. Listar Tarefa")  # Veja e conclua tarefas
@@ -44,9 +58,13 @@ def main():
 
     elif esc == "2":
         read()
+        print("Insira ID para alternar entre 'done'")
+        id = int(input(">>> "))
+        markasdone(id)
 
     elif esc == "3":
         pass
+
     elif esc == "4":
         pass
     else:
