@@ -1,11 +1,6 @@
 {
     "tasks": [
         {
-            "nome": "Ola",
-            "id": 3,
-            "done": false
-        },
-        {
             "nome": "ABC",
             "id": 9,
             "done": false

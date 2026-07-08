@@ -1,6 +1,19 @@
 import json
 
 
+def delete(taskid):
+    with open("dados.json", "r") as file:
+        data = json.load(file)
+
+    for i in data["tasks"]:
+        if i["id"] == taskid:
+            data["tasks"].remove(i)
+
+    with open("dados.json", "w") as file:
+        json.dump(data, file, indent=4)
+    print(f"Item de id {id} removido!")
+
+
 def check(id):  # Checagem de existencia de ID
     with open("dados.json", "r") as file:
         data = json.load(file)
@@ -27,9 +40,6 @@ def editname(taskid):  # Update task names
             i["nome"] = name
             print("Atualizado com sucesso!")
 
-        else:
-            continue
-
     with open("dados.json", "w") as file:  # Salva os dados atualizados
         json.dump(data, file, indent=4)
 
@@ -44,7 +54,7 @@ def create(nome, id):  # Cria tasks
 
     with open("dados.json", "w") as file:  # Salva os dados atualizados
         json.dump(data, file, indent=4)
-    print(f"Criou {dados[nome]} de ID {dados[id]} com sucesso!")
+    print(f"Criou {nome} de ID {id} com sucesso!")
 
 
 def read(id=None):  # leitura de dados.json
@@ -68,12 +78,10 @@ def markasdone(taskid):  # Alterna Done entre True ou False
 
     for i in data["tasks"]:  # Filtra data até achar desejado, então atualiza
         if i["id"] == taskid:
-            if i["id"] == False:
+            if not i["done"]:
                 i["done"] = True
             else:
                 i["done"] = False
-        else:
-            continue
 
     with open("dados.json", "w") as file:  # Salva os dados atualizados
         json.dump(data, file, indent=4)
@@ -81,39 +89,47 @@ def markasdone(taskid):  # Alterna Done entre True ou False
 
 
 def main():
-    print("1. Criar Tarefa")  # Crie tarefas
-    print("2. Listar Tarefa")  # Veja e conclua tarefas
-    print("3. Editar Tarefa")  # Edite tarefas
-    print("4. Excluir Tarefa")  # Exclua tarefas
-    esc = str(input(">>> "))
+    while True:
+        print("1. Criar Tarefa")  # Crie tarefas
+        print("2. Listar Tarefa")  # Veja e conclua tarefas
+        print("3. Editar Tarefa")  # Edite tarefas
+        print("4. Excluir Tarefa")  # Exclua tarefas
+        esc = str(input(">>> "))
 
-    if esc == "1":
-        nome = str(input("Nome da tarefa a criar: "))
-        arquivo = open("dados.json", "r")
-        id = 0
-        for i in arquivo:  # IDs ficam estranhos, mas nunca iguais.
-            id += 1
-        create(nome, id)
+        if esc == "1":
+            nome = str(input("Nome da tarefa a criar: "))
+            arquivo = open("dados.json", "r")
+            id = 0
+            for i in arquivo:  # IDs ficam estranhos, mas nunca iguais.
+                id += 1
+                create(nome, id)
 
-    elif esc == "2":
-        read()
-        print("Insira ID para alternar entre 'done'")
-        id = int(input(">>> "))
-        if check(id):
-            markasdone(id)
+        elif esc == "2":
+            read()
+            print("Enter para voltar ao menu.")
+            print("Insira ID para alternar entre 'done'")
+            id = input(">>> ")
+            if id == "" or id == " ":
+                continue
+            elif check(int(id)):
+                markasdone(int(id))
 
-    elif esc == "3":
-        read()
-        print("Insira ID para editar nome da Task")
-        id = int(input(">>> "))
-        if check(id):
-            editname(id)
+        elif esc == "3":
+            read()
+            print("Insira ID para editar nome da Task")
+            id = int(input(">>> "))
+            if check(id):
+                editname(id)
 
-    elif esc == "4":
-        pass
+        elif esc == "4":
+            read()
+            print("Insira ID para deletar a Task")
+            id = int(input(">>> "))
+            if check(id):
+                delete(id)
 
-    else:
-        print("Opção inválida!")
+        else:
+            print("Opção inválida!")
 
 
 if __name__ == "__main__":

@@ -23,10 +23,10 @@ A sua jornada é a seguinte:
 * [x] Criar tarefa
 * [x] Listar tarefas
 * [x] Editar tarefa
-* [ ] Excluir tarefa
+* [x] Excluir tarefa
 * [x] Marcar tarefa como concluída
 * [x] Salvar em JSON
-* [x] Carregar tarefas ao iniciar
+* [ ] Carregar tarefas ao iniciar
 * [ ] Validação de entradas
 * [x] Tratamento de exceções
 * [ ] Sistema de logs
