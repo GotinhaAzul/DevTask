@@ -10,3 +10,5 @@ read() -> Pode levar ID como paramêtro. Ela busca a lista por ID e printa a tas
 editname() -> Por hora, a única coisa definida pelo usuário é o nome, por isso, ganhou uma função. Igual a markasdone(), mas recebe input e então atualiza.
 
 check() -> Ela lê o JSON e verifica que o ID é valido, retorna True ou False.
+
+setup() -> Função que roda no início do código para verificar se dados.json existe, se não, cria. Ele cria logs.log e configura o logger.

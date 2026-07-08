@@ -29,7 +29,7 @@ A sua jornada é a seguinte:
 * [ ] Carregar tarefas ao iniciar
 * [x] Validação de entradas
 * [x] Tratamento de exceções
-* [ ] Sistema de logs
+* [x] Sistema de logs
 
 
 ---

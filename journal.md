@@ -32,3 +32,8 @@ Delete tasks -
 Eu tive um problema de merge... dei git push --force pois as mudanças na origin foram melhoradas no local.
 
 Trabalhando aqui em lidar exceções, eu amo quem criou o .isnumeric :) Cara, que ideia genial.
+
+Setup -
+Criei essa função para criar os arquivos faltantes, se faltantes, e configurar o log.
+
+Logging foi bem mais fácil do que fez parecer.

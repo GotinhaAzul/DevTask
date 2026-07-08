@@ -1,11 +1,20 @@
 import json
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='logs.log', encoding='utf-8', level=logging.DEBUG)
 
-def errors():
+def setup():
     try:
      with open("dados.json", "x") as file:
          file.write('{"tasks": []}')
     except FileExistsError:
         pass
+    try:
+        with open("logs.log", "x") as file:
+            file.write('')
+    except FileExistsError:
+        pass
+
 
 
 
@@ -19,7 +28,8 @@ def delete(taskid):
 
     with open("dados.json", "w") as file:
         json.dump(data, file, indent=4)
-    print(f"Item de id {id} removido!")
+    print(f"Item de id {taskid} removido!")
+    logger.debug(f"Item de id {taskid} foi removido. ")
 
 
 def check(id):  # Checagem de existencia de ID
@@ -45,6 +55,7 @@ def editname(taskid):  # Update task names
     for i in data["tasks"]:
         if i["id"] == taskid:
             name = str(input("Nome: "))
+            logger.debug(f"Atualizou {taskid} de {i["nome"]} -> {name} ")
             i["nome"] = name
             print("Atualizado com sucesso!")
 
@@ -63,6 +74,7 @@ def create(nome, id):  # Cria tasks
     with open("dados.json", "w") as file:  # Salva os dados atualizados
         json.dump(data, file, indent=4)
     print(f"Criou {nome} de ID {id} com sucesso!")
+    logger.debug(f"Criou {nome} de ID {id} com sucesso!")
 
 
 def read(id=None):  # leitura de dados.json
@@ -90,6 +102,7 @@ def markasdone(taskid):  # Alterna Done entre True ou False
                 i["done"] = True
             else:
                 i["done"] = False
+        logger.debug(f"Alterou task {i["nome"]} com ID {taskid} para {i["done"]} ")
 
     with open("dados.json", "w") as file:  # Salva os dados atualizados
         json.dump(data, file, indent=4)
@@ -106,12 +119,12 @@ def main():
 
         if esc == "1":
             nome = str(input("Nome da tarefa a criar: "))
-            arquivo = open("dados.json", "r")
-            id = 1
-            for i in arquivo:  # IDs ficam estranhos, mas nunca iguais.
+            with open("dados.json", "r") as file:
+                arquivo = json.load(file)
+            id = 0
+            for i in arquivo["tasks"]:  # IDs ficam estranhos, mas nunca iguais.
                 id += 1
-                create(nome, id)
-                break
+            create(nome, id)
 
         elif esc == "2":
             read()
@@ -151,5 +164,5 @@ def main():
 
 
 if __name__ == "__main__":
-    errors()
+    setup()
     main()
