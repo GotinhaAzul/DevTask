@@ -20,12 +20,12 @@ A sua jornada é a seguinte:
 
 * [x] Configurar ambiente virtual (uv, git init, GitHub)
 * [x] Criar menu interativo
-* [ ] Criar tarefa
-* [ ] Listar tarefas
+* [x] Criar tarefa
+* [x] Listar tarefas
 * [ ] Editar tarefa
 * [ ] Excluir tarefa
-* [ ] Marcar tarefa como concluída
-* [ ] Salvar em JSON
+* [x] Marcar tarefa como concluída
+* [x] Salvar em JSON
 * [ ] Carregar tarefas ao iniciar
 * [ ] Validação de entradas
 * [ ] Tratamento de exceções
