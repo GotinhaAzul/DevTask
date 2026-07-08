@@ -27,3 +27,8 @@ Update tasks -
 Delete tasks - 
 * Eu gastei uns 15 minutinhos nisso aqui. Era só reaproveitar a lógica de update tasks, mas me esqueci como funcionam dicionarios e listas, principalmente dicionarios com listas com dicionarios. Eu realmente não gosto de fazer isso com jsons.
 * Esse erro meu me incentivou a documentar como tudo se comporta no meu código.
+
+
+Eu tive um problema de merge... dei git push --force pois as mudanças na origin foram melhoradas no local.
+
+Trabalhando aqui em lidar exceções, eu amo quem criou o .isnumeric :) Cara, que ideia genial.

@@ -1,5 +1,13 @@
 import json
 
+def errors():
+    try:
+     with open("dados.json", "x") as file:
+         file.write('{"tasks": []}')
+    except FileExistsError:
+        pass
+
+
 
 def delete(taskid):
     with open("dados.json", "r") as file:
@@ -94,15 +102,16 @@ def main():
         print("2. Listar Tarefa")  # Veja e conclua tarefas
         print("3. Editar Tarefa")  # Edite tarefas
         print("4. Excluir Tarefa")  # Exclua tarefas
-        esc = str(input(">>> "))
+        esc = input(">>> ")
 
         if esc == "1":
             nome = str(input("Nome da tarefa a criar: "))
             arquivo = open("dados.json", "r")
-            id = 0
+            id = 1
             for i in arquivo:  # IDs ficam estranhos, mas nunca iguais.
                 id += 1
                 create(nome, id)
+                break
 
         elif esc == "2":
             read()
@@ -111,26 +120,36 @@ def main():
             id = input(">>> ")
             if id == "" or id == " ":
                 continue
-            elif check(int(id)):
-                markasdone(int(id))
+            elif id.isnumeric():
+                if check(int(id)):
+                    markasdone(int(id))
+            else:
+                print("ID inválido! Digitou algo no campo errado?")
 
         elif esc == "3":
             read()
             print("Insira ID para editar nome da Task")
-            id = int(input(">>> "))
-            if check(id):
-                editname(id)
+            try:
+                id = int(input(">>> "))
+                if check(id):
+                    editname(id)
+            except ValueError:
+                print("ID inválido! Digitou algo no campo errado?")
 
         elif esc == "4":
             read()
             print("Insira ID para deletar a Task")
-            id = int(input(">>> "))
-            if check(id):
-                delete(id)
+            try:
+                id = int(input(">>> "))
+                if check(id):
+                    delete(id)
+            except ValueError:
+                print("ID inválido! Digitou algo no campo errado?")
 
         else:
             print("Opção inválida!")
 
 
 if __name__ == "__main__":
+    errors()
     main()

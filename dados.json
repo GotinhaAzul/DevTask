@@ -1,9 +1,3 @@
 {
-    "tasks": [
-        {
-            "nome": "ABC",
-            "id": 9,
-            "done": false
-        }
-    ]
+    "tasks": []
 }
