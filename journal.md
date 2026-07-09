@@ -37,3 +37,9 @@ Setup -
 Criei essa função para criar os arquivos faltantes, se faltantes, e configurar o log.
 
 Logging foi bem mais fácil do que fez parecer.
+
+
+Testes; Parte 1 -
+Fazer o teste em si foi até que ok. Eu decidi testar o create(), o check() com o assert e delete().
+
+O complicado foi rodar 'pytest' na root e ir. Não fiz isso funcionar, mas, pytest só do test funcionou.

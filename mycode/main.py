@@ -50,7 +50,7 @@ def editname(taskid):  # Update task names
     with open("dados.json", "r") as file:
         data = json.load(file)
 
-    read(taskid)  # Usa a função read para exibir apenas a task desejada
+    read("dados.json", taskid)  # Usa a função read para exibir apenas a task desejada
 
     for i in data["tasks"]:
         if i["id"] == taskid:
@@ -85,7 +85,7 @@ def read(id=None):  # leitura de dados.json
             for i in tarefas["tasks"]:
                 if i["id"] == id:
                     print(i)
-                    break
+                    return i["id"]
 
         else:
             for i in tarefas["tasks"]:
@@ -127,7 +127,7 @@ def main():
             create(nome, id)
 
         elif esc == "2":
-            read()
+            read("dados.json")
             print("Enter para voltar ao menu.")
             print("Insira ID para alternar entre 'done'")
             id = input(">>> ")
@@ -140,7 +140,7 @@ def main():
                 print("ID inválido! Digitou algo no campo errado?")
 
         elif esc == "3":
-            read()
+            read("dados.json")
             print("Insira ID para editar nome da Task")
             try:
                 id = int(input(">>> "))
@@ -150,7 +150,7 @@ def main():
                 print("ID inválido! Digitou algo no campo errado?")
 
         elif esc == "4":
-            read()
+            read("dados.json")
             print("Insira ID para deletar a Task")
             try:
                 id = int(input(">>> "))

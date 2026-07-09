@@ -26,7 +26,7 @@ A sua jornada é a seguinte:
 * [x] Excluir tarefa
 * [x] Marcar tarefa como concluída
 * [x] Salvar em JSON
-* [ ] Carregar tarefas ao iniciar
+* [x] Carregar tarefas ao iniciar
 * [x] Validação de entradas
 * [x] Tratamento de exceções
 * [x] Sistema de logs
