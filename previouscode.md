@@ -25,6 +25,7 @@ def delete(taskid):
     for i in data["tasks"]:
         if i["id"] == taskid:
             data["tasks"].remove(i)
+            break
 
     with open("dados.json", "w") as file:
         json.dump(data, file, indent=4)
@@ -50,7 +51,7 @@ def editname(taskid):  # Update task names
     with open("dados.json", "r") as file:
         data = json.load(file)
 
-    read("dados.json", taskid)  # Usa a função read para exibir apenas a task desejada
+    read(taskid)  # Usa a função read para exibir apenas a task desejada
 
     for i in data["tasks"]:
         if i["id"] == taskid:

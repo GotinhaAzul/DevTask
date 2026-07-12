@@ -43,3 +43,21 @@ Testes; Parte 1 -
 Fazer o teste em si foi até que ok. Eu decidi testar o create(), o check() com o assert e delete().
 
 O complicado foi rodar 'pytest' na root e ir. Não fiz isso funcionar, mas, pytest só do test funcionou.
+
+
+---
+
+Épico 2 Planejamento
+
+Classe Task 1
+Classe TaskManager 2
+Classe Storage 3
+Classe Logging 4
+
+1 vai ter apenas nome e id
+2 recebe as funções
+3 acessa e fecha o json
+4 objeto intermediario de logs
+
+
+tasks.py -> Aqui eu usei o @dataclass, fica fácil de ler e tornou até que mais conveniente meu trabalho. Por ser um objeto bem simples, funciona bem pra mim.

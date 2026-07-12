@@ -5,3 +5,13 @@ description = "Personal Project for studies"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["mycode*"]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

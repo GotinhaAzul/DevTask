@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+devtask.egg-info/PKG-INFO
+devtask.egg-info/SOURCES.txt
+devtask.egg-info/dependency_links.txt
+devtask.egg-info/top_level.txt
+mycode/__init__.py
+mycode/storage.py
+mycode/taskmanager.py
+mycode/tasks.py
+tests/test_tasks.py
