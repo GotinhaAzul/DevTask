@@ -1,1 +1,5 @@
 
+DEBUG:mycode.logger:Criou task 'Estudar' com ID 4335
+DEBUG:mycode.logger:Alternou conclusão da task ID 4335
+DEBUG:mycode.logger:Renomeou task ID 4335 para 'Nao estudar'
+DEBUG:mycode.logger:Removeu task ID 4335

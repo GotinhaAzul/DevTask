@@ -1,34 +1,44 @@
-from mycode import storage
-
-class taskmanager:
-    def alter(self, filename, id, status):
-        bau = storage.Storage()
-        conteudo = bau.read(filename)
-        for i in conteudo["tasks"]:  # Filtra data até achar desejado, então atualiza
-            if i["id"] == id:
-                if not i["done"]:
-                    i["done"] = True
-                else:
-                    i["done"] = False
-        bau.save(conteudo, filename)
+from mycode.exceptions import TaskNotFoundError
+from mycode.storage import Storage
+from mycode.tasks import Task
 
 
-    def updatename(self, filename, id):
-        bau = storage.Storage()
-        conteudo = bau.read(filename)
-        for i in conteudo["tasks"]:
-            if i["id"] == id:
-                name = str(input("Nome: "))
-                i["nome"] = name
+class TaskManager:
+    def __init__(self, storage: Storage, filename: str = "dados.json"):
+        self._storage = storage
+        self._filename = filename
+
+    def list_all(self) -> None:
+        tasks = self._storage.read(self._filename)
+        for task in tasks:
+            print(f"[{'✓' if task.done else '-'}] {task.id}: {task.nome}")
+
+    def toggle_done(self, task_id: int) -> None:
+        tasks = self._storage.read(self._filename)
+        for task in tasks:
+            if task.id == task_id:
+                task.done = not task.done
                 break
-        bau.save(conteudo, filename)
+        else:
+            raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
+        self._storage.save_all(tasks, self._filename)
 
-
-    def delete(self, filename, id):
-        bau = storage.Storage()
-        conteudo = bau.read(filename)
-        for i in conteudo["tasks"]:
-            if i["id"] == id:
-                conteudo["tasks"].remove(i)
+    def update_name(self, task_id: int, new_name: str) -> None:
+        tasks = self._storage.read(self._filename)
+        for task in tasks:
+            if task.id == task_id:
+                task.nome = new_name
                 break
-        bau.save(conteudo, filename)
+        else:
+            raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
+        self._storage.save_all(tasks, self._filename)
+
+    def delete(self, task_id: int) -> None:
+        tasks = self._storage.read(self._filename)
+        for i, task in enumerate(tasks):
+            if task.id == task_id:
+                del tasks[i]
+                break
+        else:
+            raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
+        self._storage.save_all(tasks, self._filename)
