@@ -53,7 +53,7 @@ A sua jornada é a seguinte:
 * [x] Aprender SQL básico
 * [x] SQLite
 * [x] Script de criação das tabelas
-* [ ] CRUD no banco
+* [x] CRUD no banco
 * [ ] Camada Repository
 * [ ] Migração do JSON para SQLite
 * [ ] Índices

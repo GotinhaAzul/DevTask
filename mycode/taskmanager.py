@@ -4,9 +4,8 @@ from mycode.tasks import Task
 
 
 class TaskManager:
-    def __init__(self, storage: Storage, filename: str = "dados.json"):
+    def __init__(self, storage: Storage):
         self._storage = storage
-        self._filename = filename
 
     def list_all(self) -> None:
         tasks = self._storage.read(self._filename)
