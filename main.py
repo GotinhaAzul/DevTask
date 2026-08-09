@@ -4,6 +4,7 @@ from mycode.tasks import Task
 from mycode.logger import logs
 from mycode.exceptions import TaskNotFoundError
 import os
+import sqlite3
 
 
 def setup() -> None:
@@ -13,6 +14,12 @@ def setup() -> None:
     if not os.path.exists("logs.log"):
         with open("logs.log", "w") as f:
             f.write("")
+    # STATUS default 0 para False
+    with sqlite3.connect('database.db') as connection:
+        cursor = connection.cursor()
+        cursor.execute("""CREATE TABLE IF NOT EXISTS TASKS (NAME TEXT, ID INTEGER, STATUS BOOLEAN NOT NULL DEFAULT 0 """)
+        connection.commit()
+
 
 
 def main() -> None:
