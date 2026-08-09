@@ -15,7 +15,7 @@ def test_add_and_read(file = "testdatabase.db"):
     assert subject.nome == "Ola!"
     assert subject.id == task.id
     assert subject.done is False
-
+    storage.close()
     file_path.unlink(missing_ok=True)
 
 def test_update_and_delete(file="testdatabase.db"):
@@ -33,5 +33,7 @@ def test_update_and_delete(file="testdatabase.db"):
     assert subject.done is True
 
     storage.delete(task.id)
+
     assert storage.getbyid(task.id) is None
+    storage.close()
     file_path.unlink(missing_ok=True)

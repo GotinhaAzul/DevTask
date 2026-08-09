@@ -56,8 +56,8 @@ A sua jornada é a seguinte:
 * [x] CRUD no banco
 * [x] Camada Repository
 * [x] Migração do JSON para SQLite
-* [ ] Índices
-* [ ] Seeds
+* [x] Índices
+* [x] Seeds
 
 ---
 

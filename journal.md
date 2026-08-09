@@ -58,3 +58,16 @@ Classe Logging 4
 2 recebe as funções
 3 acessa e fecha o json
 4 objeto intermediario de logs
+
+
+Épico 3 -
+
+Esse não foi tão difícil, resolvi tudo em umas 3 horas. Storage.py tava bem simples de atualizar, adicionei todo o CRUD nele e implementei com o SQL. 
+
+Removi toda e qualquer noção que o taskmanager tinha sobre o banco de dados, dessa forma, ele vira um gerenciador mesmo.
+
+Atualizar os testes foi o mais chato mesmo.
+
+...
+
+Eu estava prestes a entregar a vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.

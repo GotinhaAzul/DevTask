@@ -23,16 +23,19 @@ class Storage:
         cursor.execute(query, id_to_delete)
         self.conn.commit()
 
+
     def read(self) -> list[Task]:
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks")
         content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
+
         return content
 
     def update(self, task: Task) -> None:
         cursor = self.conn.cursor()
         cursor.execute("UPDATE tasks SET name = ?, status = ? WHERE id = ?", (task.nome, task.done, task.id))
         self.conn.commit()
+
 
     def getbyid(self, taskid: int) -> Task:
         cursor = self.conn.cursor()
@@ -42,3 +45,6 @@ class Storage:
             return None
         else:
             return Task(nome=content['name'], id=content[1], done=bool(content[2]))
+
+    def close(self) -> None:
+        self.conn.close()
