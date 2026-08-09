@@ -8,36 +8,30 @@ class TaskManager:
         self._storage = storage
 
     def list_all(self) -> None:
-        tasks = self._storage.read(self._filename)
+        tasks = self._storage.read()
         for task in tasks:
             print(f"[{'✓' if task.done else '-'}] {task.id}: {task.nome}")
 
     def toggle_done(self, task_id: int) -> None:
-        tasks = self._storage.read(self._filename)
-        for task in tasks:
-            if task.id == task_id:
-                task.done = not task.done
-                break
-        else:
+        task = self._storage.getbyid(task_id)
+        if task is None:
             raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
-        self._storage.save_all(tasks, self._filename)
+
+        task.done = not task.done
+        self._storage.update(task)
+
 
     def update_name(self, task_id: int, new_name: str) -> None:
-        tasks = self._storage.read(self._filename)
-        for task in tasks:
-            if task.id == task_id:
-                task.nome = new_name
-                break
-        else:
+        task = self._storage.getbyid(task_id)
+        if task is None:
             raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
-        self._storage.save_all(tasks, self._filename)
+
+        task.nome = new_name
+        self._storage.update(task)
 
     def delete(self, task_id: int) -> None:
-        tasks = self._storage.read(self._filename)
-        for i, task in enumerate(tasks):
-            if task.id == task_id:
-                del tasks[i]
-                break
-        else:
+        task = self._storage.getbyid(task_id)
+        if task is None:
             raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
-        self._storage.save_all(tasks, self._filename)
+
+        self._storage.delete(task.id)
