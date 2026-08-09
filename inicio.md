@@ -54,8 +54,8 @@ A sua jornada é a seguinte:
 * [x] SQLite
 * [x] Script de criação das tabelas
 * [x] CRUD no banco
-* [ ] Camada Repository
-* [ ] Migração do JSON para SQLite
+* [x] Camada Repository
+* [x] Migração do JSON para SQLite
 * [ ] Índices
 * [ ] Seeds
 

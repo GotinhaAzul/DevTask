@@ -4,7 +4,7 @@ from mycode.tasks import Task
 
 
 class TaskManager:
-    def __init__(self, storage: Storage):
+    def __init__(self, storage: Storage) -> None:
         self._storage = storage
 
     def list_all(self) -> None:

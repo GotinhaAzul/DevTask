@@ -7,17 +7,11 @@ import os
 import sqlite3
 
 
-def setup() -> None:
-    if not os.path.exists("dados.json"):
-        with open("dados.json", "w") as f:
-            f.write('{"tasks": []}')
-    if not os.path.exists("logs.log"):
-        with open("logs.log", "w") as f:
-            f.write("")
+def setup(filename = 'database.db') -> None:
     # STATUS default 0 para False
-    with sqlite3.connect('database.db') as connection:
+    with sqlite3.connect(filename) as connection:
         cursor = connection.cursor()
-        cursor.execute("""CREATE TABLE IF NOT EXISTS TASKS (NAME TEXT, ID INTEGER, STATUS BOOLEAN NOT NULL DEFAULT 0 """)
+        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER, STATUS BOOLEAN NOT NULL DEFAULT 0) """)
         connection.commit()
 
 
@@ -41,7 +35,7 @@ def main() -> None:
                 print("Nome inválido!")
                 continue
             task = Task(nome=nome)
-            storage.add(task, "dados.json")
+            storage.add(task)
             logger.process(f"Criou task '{nome}' com ID {task.id}")
             print(f"Task '{nome}' criada com ID {task.id}!")
 
