@@ -1,25 +1,34 @@
-import json
-
 from mycode.tasks import Task
+import sqlite3
+
 
 class Storage:
-    def _write_raw(self, content: dict, filename: str) -> None:
-        with open(filename, "w") as f:
-            json.dump(content, f, indent=4)
+    def __init__(self, database: str = "database.db") -> None:
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
 
-    def _read_raw(self, filename: str) -> dict:
-        with open(filename, "r") as f:
-            return json.load(f)
- # ------------------------------------
-    def add(self, task: Task, filename: str)-> None:
-        data = self._read_raw(filename)
-        data["tasks"].append(task.to_dict())
-        self._write_raw(data, filename)
 
-    def read(self, filename: str) -> list[Task]:
-        data = self._read_raw(filename)
-        return [Task.from_dict(item) for item in data["tasks"]]
+    def add(self, task: Task)-> None:
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "INSERT INTO tasks (name, id, status) VALUES (?, ?, ?)",
+            (task.nome, task.id, task.done),
+        )
+        self.conn.commit()
 
-    def save_all(self, tasks: list[Task], filename: str) -> None:
-        data = {"tasks": [t.to_dict() for t in tasks]}
-        self._write_raw(data, filename)
+    def delete(self, task: Task):
+        cursor = self.conn.cursor()
+        query = "DELETE FROM tasks WHERE id = ?"
+        id_to_delete = (task.id,)
+        cursor.execute(query, id_to_delete)
+        self.conn.commit()
+
+    def read(self) -> list:
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM tasks")
+        return cursor.fetchall()
+
+def update(self, task: Task) -> None:
+    cursor = self.conn.cursor()
+    cursor.execute("UPDATE tasks SET status = ? WHERE id = ?", (not task.done, task.id))
+    self.conn.commit()
