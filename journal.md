@@ -58,6 +58,3 @@ Classe Logging 4
 2 recebe as funções
 3 acessa e fecha o json
 4 objeto intermediario de logs
-
-
-tasks.py -> Aqui eu usei o @dataclass, fica fácil de ler e tornou até que mais conveniente meu trabalho. Por ser um objeto bem simples, funciona bem pra mim.

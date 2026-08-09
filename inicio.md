@@ -42,9 +42,9 @@ A sua jornada é a seguinte:
 * [x] Classe `Storage`
 * [x] Classe `Logger`
 * [ ] Uso de `@dataclass`
-* [~] Type Hints
+* [x] Type Hints
 * [x] Separação em módulos
-* [ ] Exceptions personalizadas
+* [x] Exceptions personalizadas
 
 ---
 
