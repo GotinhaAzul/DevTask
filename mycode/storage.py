@@ -11,9 +11,10 @@ class Storage:
     def add(self, task: Task)-> None:
         cursor = self.conn.cursor()
         cursor.execute(
-            "INSERT INTO tasks (name, id, status) VALUES (?, ?, ?)",
-            (task.nome, task.id, task.done),
+            "INSERT INTO tasks (name, status) VALUES (?, ?)",
+            (task.nome, task.done),
         )
+        task.id = cursor.lastrowid
         self.conn.commit()
 
     def delete(self, taskid: int):

@@ -5,3 +5,6 @@ DEBUG:mycode.logger:Renomeou task ID 4335 para 'Nao estudar'
 DEBUG:mycode.logger:Removeu task ID 4335
 DEBUG:mycode.logger:Criou task 'Oi' com ID 7719
 DEBUG:mycode.logger:Removeu task ID 7719
+DEBUG:mycode.logger:Criou task 'ABC' com ID 6
+DEBUG:mycode.logger:Removeu task ID 6
+DEBUG:mycode.logger:Renomeou task ID 2 para 'Tomates'

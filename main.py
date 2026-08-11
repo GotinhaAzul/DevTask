@@ -1,10 +1,10 @@
+import sqlite3
+
+from mycode.exceptions import TaskNotFoundError
+from mycode.logger import logs
 from mycode.taskmanager import TaskManager
 from mycode.storage import Storage
 from mycode.tasks import Task
-from mycode.logger import logs
-from mycode.exceptions import TaskNotFoundError
-import os
-import sqlite3
 
 
 def setup(filename = 'database.db') -> None:
@@ -12,8 +12,8 @@ def setup(filename = 'database.db') -> None:
     connection = sqlite3.connect(filename)
     try:
         cursor = connection.cursor()
-        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER, STATUS BOOLEAN NOT NULL DEFAULT 0) """)
-        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)")
+        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0) """)
+        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)") # Reduntante. Vou manter apenas para não me esquecer e caso, no futuro, use uma forma diferente de ID (Irei...)
         connection.commit()
         connection.close()
     finally:
@@ -39,7 +39,7 @@ def main() -> None:
                     print("Nome inválido!")
                     continue
                 task = Task(nome=nome)
-                storage.add(task)
+                manager.add_task(task)
                 logger.process(f"Criou task '{nome}' com ID {task.id}")
                 print(f"Task '{nome}' criada com ID {task.id}!")
 
@@ -59,7 +59,7 @@ def main() -> None:
                 if not resp.isdigit():
                     print("ID inválido!")
                     continue
-                    novo_nome = input("Novo nome: ").strip()
+                novo_nome = input("Novo nome: ").strip()
                 if not novo_nome:
                     print("Nome inválido!")
                     continue

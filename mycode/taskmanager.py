@@ -35,3 +35,6 @@ class TaskManager:
             raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
 
         self._storage.delete(task.id)
+
+    def add_task(self, task: Task) -> None:
+        self._storage.add(task)
