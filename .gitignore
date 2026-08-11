@@ -1,1 +1,2 @@
-tracker
+.pytest_cache
+database.db

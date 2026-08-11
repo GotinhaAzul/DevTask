@@ -38,10 +38,10 @@ def main() -> None:
                 if not nome:
                     print("Nome inválido!")
                     continue
-                    task = Task(nome=nome)
-                    storage.add(task)
-                    logger.process(f"Criou task '{nome}' com ID {task.id}")
-                    print(f"Task '{nome}' criada com ID {task.id}!")
+                task = Task(nome=nome)
+                storage.add(task)
+                logger.process(f"Criou task '{nome}' com ID {task.id}")
+                print(f"Task '{nome}' criada com ID {task.id}!")
 
             elif esc == "2":
                 manager.list_all()

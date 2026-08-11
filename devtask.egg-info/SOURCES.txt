@@ -3,6 +3,7 @@ pyproject.toml
 devtask.egg-info/PKG-INFO
 devtask.egg-info/SOURCES.txt
 devtask.egg-info/dependency_links.txt
+devtask.egg-info/requires.txt
 devtask.egg-info/top_level.txt
 mycode/__init__.py
 mycode/exceptions.py

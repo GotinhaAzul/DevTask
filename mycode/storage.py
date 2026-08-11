@@ -37,7 +37,7 @@ class Storage:
         self.conn.commit()
 
 
-    def getbyid(self, taskid: int) -> Task:
+    def getbyid(self, taskid: int) -> Task | None:
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks WHERE ID = ?", (taskid,))
         content = cursor.fetchone()

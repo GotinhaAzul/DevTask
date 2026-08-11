@@ -4,6 +4,7 @@ Version: 0.1.0
 Summary: Personal Project for studies
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
+Requires-Dist: pytest>=9.1.1
 
 storage.py - Toma conta de realizar as ações CRUD
 
