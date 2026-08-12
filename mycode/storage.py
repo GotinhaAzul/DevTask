@@ -5,7 +5,7 @@ import sqlite3
 class Storage:
     def __init__(self, database: str = "database.db") -> None:
         self.database = database
-        self.conn = sqlite3.connect(self.database)
+        self.conn = sqlite3.connect(self.database, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
 
     def add(self, task: Task)-> None:
@@ -28,7 +28,7 @@ class Storage:
     def read(self) -> list[Task]:
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks")
-        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
+        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()] # Isso aqui deve trazer problemas depois.
 
         return content
 

@@ -44,7 +44,7 @@ def main() -> None:
                 print(f"Task '{nome}' criada com ID {task.id}!")
 
             elif esc == "2":
-                manager.list_all()
+                manager.helper_show_tasks()
                 resp = input("\nEnter para voltar ou ID para alternar conclusão: ").strip()
                 if resp and resp.isdigit():
                     try:
@@ -54,7 +54,7 @@ def main() -> None:
                         print("ID inválido! Task não encontrada.")
 
             elif esc == "3":
-                manager.list_all()
+                manager.helper_show_tasks()
                 resp = input("ID da task para editar: ").strip()
                 if not resp.isdigit():
                     print("ID inválido!")
