@@ -9,3 +9,6 @@ class TaskOut(BaseModel):
 class TaskIn(BaseModel):
     nome: str
     done: bool = False
+
+class TaskUpdate(BaseModel):
+    nome: str | None = None

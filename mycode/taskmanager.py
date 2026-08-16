@@ -39,7 +39,5 @@ class TaskManager:
     def add_task(self, task: Task) -> None:
         self._storage.add(task)
 
-    def helper_show_tasks(self):
-        tasks = self._storage.read()
-        for task in tasks:
-            print(f"[{'✓' if task.done else '-'}] {task.id}: {task.nome}")
+    def get(self, task_id: int) -> Task | None:
+        return self._storage.getbyid(task_id)

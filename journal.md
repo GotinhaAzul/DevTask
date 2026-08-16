@@ -70,4 +70,4 @@ Atualizar os testes foi o mais chato mesmo.
 
 ...
 
-Eu estava prestes a entregar a vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.
+Eu estava prestes a entregar e vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.

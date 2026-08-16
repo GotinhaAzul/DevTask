@@ -2,9 +2,10 @@ import sqlite3
 
 from mycode.exceptions import TaskNotFoundError
 from mycode.logger import logs
-from mycode.taskmanager import TaskManager
 from mycode.storage import Storage
+from mycode.taskmanager import TaskManager
 from mycode.tasks import Task
+
 
 
 def setup(filename = 'database.db') -> None:
@@ -54,7 +55,10 @@ def main() -> None:
                         print("ID inválido! Task não encontrada.")
 
             elif esc == "3":
-                manager.helper_show_tasks()
+                tasks = manager.list_all()
+                for task in tasks:
+                    print(f"[{'✓' if task.done else '-'}] {task.id}: {task.nome}")
+
                 resp = input("ID da task para editar: ").strip()
                 if not resp.isdigit():
                     print("ID inválido!")
