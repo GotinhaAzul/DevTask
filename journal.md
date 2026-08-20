@@ -71,3 +71,12 @@ Atualizar os testes foi o mais chato mesmo.
 ...
 
 Eu estava prestes a entregar e vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.
+
+
+Épico 4 -
+
+Trabalhando nas APIs, eu meio que me esqueci de escrever aqui.
+
+Gastei meu token de IA para dar uma estruturada inicial e tô construindo por cima.
+
+Lembrar de fazer uma nova endpoint para busca!

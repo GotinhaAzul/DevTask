@@ -8,6 +8,7 @@ from mycode.tasks import Task
 class TaskManager:
     def __init__(self, storage: Storage) -> None:
         self._storage = storage
+
     def list_all(self) -> list[Task]:
         tasks = self._storage.read()
         return tasks
@@ -41,3 +42,11 @@ class TaskManager:
 
     def get(self, task_id: int) -> Task | None:
         return self._storage.getbyid(task_id)
+
+    def set_done(self, task_id: int, done: bool) -> None:
+        task = self._storage.getbyid(task_id)
+        if task == None:
+            raise TaskNotFoundError(f"Task com ID {task_id} não encontrada.")
+        else:
+            task.done = done
+        self._storage.update(task)

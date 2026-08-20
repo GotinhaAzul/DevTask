@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 
+
 class TaskOut(BaseModel):
     nome: str
     id: int | None = None
@@ -12,3 +13,4 @@ class TaskIn(BaseModel):
 
 class TaskUpdate(BaseModel):
     nome: str | None = None
+    done: bool | None = None

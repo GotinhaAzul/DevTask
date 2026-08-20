@@ -41,7 +41,7 @@ A sua jornada é a seguinte:
 * [x] Classe `TaskManager`
 * [x] Classe `Storage`
 * [x] Classe `Logger`
-* [ ] Uso de `@dataclass`
+* [x] Uso de `@dataclass`
 * [x] Type Hints
 * [x] Separação em módulos
 * [x] Exceptions personalizadas
@@ -63,10 +63,10 @@ A sua jornada é a seguinte:
 
 # Épico 4 — API REST
 
-* [ ] FastAPI
-* [ ] Swagger automático
-* [ ] CRUD completo
-* [ ] Paginação
+* [x] FastAPI
+* [x] Swagger automático
+* [x] CRUD completo
+* [x] Paginação
 * [ ] Busca
 * [ ] Filtros
 * [ ] Ordenação

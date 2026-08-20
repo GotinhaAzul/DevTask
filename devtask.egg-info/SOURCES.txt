@@ -13,5 +13,6 @@ mycode/schemas.py
 mycode/storage.py
 mycode/taskmanager.py
 mycode/tasks.py
+tests/test_api_list.py
 tests/test_storage.py
 tests/test_tasks.py
