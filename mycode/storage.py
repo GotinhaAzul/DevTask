@@ -26,6 +26,7 @@ class Storage:
 
 
     def read(self) -> list[Task]:
+        # Pega todos os Task do db como uma lista e transforma cada row em uma caracteristica do objeto em uma lista.
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks")
         content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()] # Isso aqui deve trazer problemas depois.

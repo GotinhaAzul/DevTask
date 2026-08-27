@@ -1,4 +1,6 @@
-from fastapi import Depends, FastAPI, HTTPException
+from re import search
+
+from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
 from mycode.exceptions import TaskNotFoundError
@@ -19,8 +21,14 @@ def get_manager():
 
 
 @app.get("/tasks", response_model=Page[TaskOut]) # Não sei porque o return type é unknown.
-def list_tasks(taskmanager: TaskManager = Depends(get_manager)) -> Page[TaskOut]:
-    return paginate(taskmanager.list_all())
+def list_tasks(q: int = Query(None, description="Insert Task ID to search for it."),taskmanager: TaskManager = Depends(get_manager)) -> Page[TaskOut]:
+    if q:
+        task = taskmanager.get(q)
+        items = [task] if task else [] # Seguinte, isso aqui é uma lista, para o paginate, e, se task existir, admite seu valor, se não, é vazia.
+
+        return paginate(items)
+    else:
+        return paginate(taskmanager.list_all())
 
 
 @app.post("/tasks", status_code=201, response_model=TaskOut)

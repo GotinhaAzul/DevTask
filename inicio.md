@@ -67,7 +67,7 @@ A sua jornada é a seguinte:
 * [x] Swagger automático
 * [x] CRUD completo
 * [x] Paginação
-* [ ] Busca
+* [x] Busca
 * [ ] Filtros
 * [ ] Ordenação
 * [ ] Validação de dados
