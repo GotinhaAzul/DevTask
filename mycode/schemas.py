@@ -14,3 +14,9 @@ class TaskIn(BaseModel):
 class TaskUpdate(BaseModel):
     nome: str | None = None
     done: bool | None = None
+
+
+class TaskFilter(BaseModel):
+    nome: str | None = None
+    done: bool | None = None
+    id: int | None = None

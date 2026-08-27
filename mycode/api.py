@@ -4,7 +4,7 @@ from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
 from mycode.exceptions import TaskNotFoundError
-from mycode.schemas import TaskIn, TaskOut, TaskUpdate
+from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate
 from mycode.storage import Storage
 from mycode.taskmanager import TaskManager
 from mycode.tasks import Task
@@ -19,14 +19,17 @@ def get_manager():
     finally:
         storage.close()
 
+def no_none(self) -> bool:
+    return any(value is None for value in vars(self).values())
+
 
 @app.get("/tasks", response_model=Page[TaskOut]) # Não sei porque o return type é unknown.
-def list_tasks(q: int = Query(None, description="Insert Task ID to search for it."),taskmanager: TaskManager = Depends(get_manager)) -> Page[TaskOut]:
-    if q:
-        task = taskmanager.get(q)
-        items = [task] if task else [] # Seguinte, isso aqui é uma lista, para o paginate, e, se task existir, admite seu valor, se não, é vazia.
+def list_tasks(query: TaskFilter = Query(None, description="Insert search parameters to search for it."),taskmanager: TaskManager = Depends(get_manager)) -> Page[TaskOut]:
+    if not no_none(query):
+        tasks = taskmanager.list_all()
+        filtered_tasks = [task for task in tasks if task.id == query.id or task.nome == query.nome or task.done == query.done]
+        return paginate(filtered_tasks)
 
-        return paginate(items)
     else:
         return paginate(taskmanager.list_all())
 
@@ -37,12 +40,14 @@ def add_task(task_in: TaskIn, manager: TaskManager = Depends(get_manager)) -> Ta
     manager.add_task(task)
     return task
 
+
 @app.delete("/tasks/{task_id}", status_code=204)
 def delete_task(task_id: int, manager: TaskManager = Depends(get_manager)) -> None:
     try:
         manager.delete(task_id)
     except TaskNotFoundError:
         raise HTTPException(status_code=404, detail=f"Task de ID {task_id} não encontrada!")
+
 
 @app.patch("/tasks/{task_id}", status_code=200, response_model=TaskOut)
 def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(get_manager)) ->  Task | None:

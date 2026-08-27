@@ -68,7 +68,7 @@ A sua jornada é a seguinte:
 * [x] CRUD completo
 * [x] Paginação
 * [x] Busca
-* [ ] Filtros
+* [x] Filtros
 * [ ] Ordenação
 * [ ] Validação de dados
 * [ ] Middleware de logs
