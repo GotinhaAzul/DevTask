@@ -48,5 +48,15 @@ class Storage:
         else:
             return Task(nome=content['name'], id=content[1], done=bool(content[2]))
 
+    def read_sorted(self, sort_by: str, descending: bool = False) -> list[Task]:
+        SORT_COLUMNS = {"id": "ID", "done": "STATUS"}
+        column = SORT_COLUMNS.get(sort_by, "ID")
+        direction = "DESC" if descending else "ASC"
+        cursor = self.conn.cursor()
+        cursor.execute(f"SELECT * FROM tasks ORDER BY {column} {direction}")
+        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
+        return content
+
+
     def close(self) -> None:
         self.conn.close()

@@ -1,3 +1,5 @@
+from enum import Enum
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -15,8 +17,14 @@ class TaskUpdate(BaseModel):
     nome: str | None = None
     done: bool | None = None
 
+class TaskSort(str, Enum):
+    id = "id"
+    done = "done"
+
 
 class TaskFilter(BaseModel):
     nome: str | None = None
     done: bool | None = None
     id: int | None = None
+    sort_by: TaskSort = TaskSort.id
+    descending: bool = False

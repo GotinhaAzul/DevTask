@@ -50,3 +50,6 @@ class TaskManager:
         else:
             task.done = done
         self._storage.update(task)
+
+    def get_sorted(self, sort_by: str,  descending: bool = False):
+       return self._storage.read_sorted(sort_by, descending)

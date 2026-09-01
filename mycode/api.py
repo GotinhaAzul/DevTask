@@ -1,4 +1,4 @@
-from re import search
+from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
@@ -19,19 +19,23 @@ def get_manager():
     finally:
         storage.close()
 
-def no_none(self) -> bool:
-    return any(value is None for value in vars(self).values())
-
 
 @app.get("/tasks", response_model=Page[TaskOut]) # Não sei porque o return type é unknown.
-def list_tasks(query: TaskFilter = Query(None, description="Insert search parameters to search for it."),taskmanager: TaskManager = Depends(get_manager)) -> Page[TaskOut]:
-    if not no_none(query):
-        tasks = taskmanager.list_all()
-        filtered_tasks = [task for task in tasks if task.id == query.id or task.nome == query.nome or task.done == query.done]
-        return paginate(filtered_tasks)
+def list_tasks(
+    query: Annotated[TaskFilter, Query(description="Insert search parameters to search for it.")],
+    taskmanager: TaskManager = Depends(get_manager),
+) -> Page[TaskOut]:
 
-    else:
-        return paginate(taskmanager.list_all())
+    tasks = taskmanager.get_sorted(query.sort_by, query.descending)
+
+    filtered_tasks = [
+        task for task in tasks
+        if (query.id is None or task.id == query.id)
+        and (query.nome is None or task.nome == query.nome)
+        and (query.done is None or task.done == query.done)
+    ]
+
+    return paginate(filtered_tasks)
 
 
 @app.post("/tasks", status_code=201, response_model=TaskOut)

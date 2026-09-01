@@ -69,8 +69,8 @@ A sua jornada é a seguinte:
 * [x] Paginação
 * [x] Busca
 * [x] Filtros
-* [ ] Ordenação
-* [ ] Validação de dados
+* [x] Ordenação
+* [~] Validação de dados
 * [ ] Middleware de logs
 
 **Endpoints:**
