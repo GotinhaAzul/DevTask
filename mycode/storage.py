@@ -5,15 +5,16 @@ import sqlite3
 class Storage:
     def __init__(self, database: str = "database.db") -> None:
         self.database = database
-        self.conn = sqlite3.connect(self.database)
+        self.conn = sqlite3.connect(self.database, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
 
     def add(self, task: Task)-> None:
         cursor = self.conn.cursor()
         cursor.execute(
-            "INSERT INTO tasks (name, id, status) VALUES (?, ?, ?)",
-            (task.nome, task.id, task.done),
+            "INSERT INTO tasks (name, status) VALUES (?, ?)",
+            (task.nome, task.done),
         )
+        task.id = cursor.lastrowid
         self.conn.commit()
 
     def delete(self, taskid: int):
@@ -25,9 +26,10 @@ class Storage:
 
 
     def read(self) -> list[Task]:
+        # Pega todos os Task do db como uma lista e transforma cada row em uma caracteristica do objeto em uma lista.
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks")
-        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
+        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()] # Isso aqui deve trazer problemas depois.
 
         return content
 
@@ -37,7 +39,7 @@ class Storage:
         self.conn.commit()
 
 
-    def getbyid(self, taskid: int) -> Task:
+    def getbyid(self, taskid: int) -> Task | None:
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM tasks WHERE ID = ?", (taskid,))
         content = cursor.fetchone()
@@ -45,6 +47,16 @@ class Storage:
             return None
         else:
             return Task(nome=content['name'], id=content[1], done=bool(content[2]))
+
+    def read_sorted(self, sort_by: str, descending: bool = False) -> list[Task]:
+        SORT_COLUMNS = {"id": "ID", "done": "STATUS"}
+        column = SORT_COLUMNS.get(sort_by, "ID")
+        direction = "DESC" if descending else "ASC"
+        cursor = self.conn.cursor()
+        cursor.execute(f"SELECT * FROM tasks ORDER BY {column} {direction}")
+        content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
+        return content
+
 
     def close(self) -> None:
         self.conn.close()

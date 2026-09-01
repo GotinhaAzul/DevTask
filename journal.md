@@ -70,4 +70,17 @@ Atualizar os testes foi o mais chato mesmo.
 
 ...
 
-Eu estava prestes a entregar a vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.
+Eu estava prestes a entregar e vi um erro, faltou o close() em cada parada SQL, tá resolvido agora.
+
+
+Épico 4 -
+
+Trabalhando nas APIs, eu meio que me esqueci de escrever aqui.
+
+Gastei meu token de IA para dar uma estruturada inicial e tô construindo por cima.
+
+Lembrar de fazer uma nova endpoint para busca! <- Isso não foi necessário.
+
+Resolvi aqui a busca, aprendi o porque de usar classes para estruturar a API, principalmente a função do pydantic.
+
+Anotando isso aqui já: para fazer a ordenação, vamos permitir ordenar apenas por ID, já que os filtros resolvem o resto. Ai, em teoria, tudo fica ordenado pelo auto increment, mas, vou colocar uma ordenação no banco para ficar melhor, já que fazer tudo em memória iria queimar a RAM de alguém.
