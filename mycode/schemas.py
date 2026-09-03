@@ -1,6 +1,8 @@
 from enum import Enum
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
+
+from mycode.constants import TASK_NAME_MAX_LENGTH, TASK_NAME_MIN_LENGTH
 
 
 class TaskOut(BaseModel):
@@ -10,11 +12,11 @@ class TaskOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class TaskIn(BaseModel):
-    nome: str
+    nome: str = Field(min_length=TASK_NAME_MIN_LENGTH, max_length=TASK_NAME_MAX_LENGTH, strip_whitespace=True)
     done: bool = False
 
 class TaskUpdate(BaseModel):
-    nome: str | None = None
+    nome: str | None = Field(default=None, min_length=TASK_NAME_MIN_LENGTH, max_length=TASK_NAME_MAX_LENGTH, strip_whitespace=True)
     done: bool | None = None
 
 class TaskSort(str, Enum):

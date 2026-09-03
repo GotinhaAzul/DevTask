@@ -45,7 +45,7 @@ def main() -> None:
                 print(f"Task '{nome}' criada com ID {task.id}!")
 
             elif esc == "2":
-                manager.helper_show_tasks()
+                print(manager.list_all())
                 resp = input("\nEnter para voltar ou ID para alternar conclusão: ").strip()
                 if resp and resp.isdigit():
                     try:

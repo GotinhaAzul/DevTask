@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
-from mycode.exceptions import TaskNotFoundError
+from mycode.exceptions import TaskNotFoundError, TaskValidationError
 from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate
 from mycode.storage import Storage
 from mycode.taskmanager import TaskManager
@@ -41,7 +41,10 @@ def list_tasks(
 @app.post("/tasks", status_code=201, response_model=TaskOut)
 def add_task(task_in: TaskIn, manager: TaskManager = Depends(get_manager)) -> Task:
     task = Task(nome=task_in.nome, done=task_in.done)
-    manager.add_task(task)
+    try:
+        manager.add_task(task)
+    except (ValueError, TaskValidationError):
+        raise HTTPException(status_code=422, detail="Task inválida!")
     return task
 
 
@@ -61,5 +64,8 @@ def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(g
         if "done" in data.model_fields_set and data.done is not None:
             manager.set_done(task_id, data.done)
         return manager.get(task_id)
+    except TaskValidationError:
+        raise HTTPException(status_code=422, detail=f"Task de nome inválido.")
+
     except TaskNotFoundError:
         raise HTTPException(status_code=404, detail=f"Task de ID {task_id} não encontrada!")

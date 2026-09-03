@@ -84,3 +84,7 @@ Lembrar de fazer uma nova endpoint para busca! <- Isso não foi necessário.
 Resolvi aqui a busca, aprendi o porque de usar classes para estruturar a API, principalmente a função do pydantic.
 
 Anotando isso aqui já: para fazer a ordenação, vamos permitir ordenar apenas por ID, já que os filtros resolvem o resto. Ai, em teoria, tudo fica ordenado pelo auto increment, mas, vou colocar uma ordenação no banco para ficar melhor, já que fazer tudo em memória iria queimar a RAM de alguém.
+
+Seguinte, eu criei o constants.py para evitar ter de escrever magic_numbers por aí.
+
+Agora tenho todos os dados válidados, foi basicamente um trabalho no schemas.py e taskmanager.py
