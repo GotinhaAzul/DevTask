@@ -73,6 +73,7 @@ dependencies = [
     { name = "logging" },
     { name = "pydantic" },
     { name = "pytest" },
+    { name = "starlette" },
     { name = "uvicorn" },
 ]
 
@@ -84,6 +85,7 @@ requires-dist = [
     { name = "logging", specifier = ">=0.4.9.6" },
     { name = "pydantic", specifier = ">=2.13.4" },
     { name = "pytest", specifier = ">=9.1.1" },
+    { name = "starlette", specifier = ">=1.6.0" },
     { name = "uvicorn", specifier = ">=0.52.1" },
 ]
 

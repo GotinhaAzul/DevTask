@@ -10,6 +10,7 @@ Requires-Dist: httpx>=0.28.1
 Requires-Dist: logging>=0.4.9.6
 Requires-Dist: pydantic>=2.13.4
 Requires-Dist: pytest>=9.1.1
+Requires-Dist: starlette>=1.6.0
 Requires-Dist: uvicorn>=0.52.1
 
 storage.py - Toma conta de realizar as ações CRUD

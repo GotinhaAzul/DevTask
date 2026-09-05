@@ -3,14 +3,18 @@ from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
+
 from mycode.exceptions import TaskNotFoundError, TaskValidationError
+from mycode.logger import LoggingMiddleware
 from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate
 from mycode.storage import Storage
 from mycode.taskmanager import TaskManager
 from mycode.tasks import Task
 
+
 app = FastAPI()
 add_pagination(app)
+app.add_middleware(LoggingMiddleware)
 
 def get_manager():
     storage = Storage()
