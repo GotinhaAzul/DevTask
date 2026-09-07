@@ -70,8 +70,8 @@ A sua jornada é a seguinte:
 * [x] Busca
 * [x] Filtros
 * [x] Ordenação
-* [~] Validação de dados
-* [ ] Middleware de logs
+* [x] Validação de dados
+* [x] Middleware de logs
 
 **Endpoints:**
 
