@@ -21,6 +21,9 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         start_time = time.perf_counter()
         try:
             response = await call_next(request)
+        except Exception as e:
+            logger.info(f"{request.method} {request.url.path} falhou com {e}")
+            raise e
         finally:
             process_time = time.perf_counter() - start_time
             logger.info(f"{request.method} {request.url.path} Completado em {process_time:.4f}s")
