@@ -8,11 +8,11 @@ dependencies = [
     "fastapi>=0.141.1",
     "fastapi-pagination>=0.15.16",
     "httpx>=0.28.1",
-    "logging>=0.4.9.6",
     "pydantic>=2.13.4",
     "pytest>=9.1.1",
+    "requests>=2.34.2",
     "starlette>=1.6.0",
-    "uvicorn>=0.52.1",
+    "uvicorn>=0.52.1"
 ]
 
 [tool.setuptools.packages.find]
@@ -24,3 +24,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"

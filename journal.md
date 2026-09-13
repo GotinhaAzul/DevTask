@@ -88,3 +88,17 @@ Anotando isso aqui já: para fazer a ordenação, vamos permitir ordenar apenas 
 Seguinte, eu criei o constants.py para evitar ter de escrever magic_numbers por aí.
 
 Agora tenho todos os dados válidados, foi basicamente um trabalho no schemas.py e taskmanager.py
+
+
+Épico 5 -
+
+Plano para esse é o seguinte:
+* Vou criar uma nova table users com USERID, usuário e senha.
+* Vou adicionar uma nova column na table tasks com USERID
+* Assim, apenas usuários de USERID x pode ver as tasks de USERID x.
+* Ai, na API, peço para enviar, junto da request, o USERID, ai já consigo linkar tudo. (Tomar cuidado com isso.)
+* No CLI, assim que acessar, insere usuário e senha, associo ao USERID e mesmo fluxo que API.
+
+Melhor ainda, eu vou fazer o CLI chamar a API para realizar ações, dessa forma, ao inserir usuário e senha (se validado) eu linko a sessão com o USERID, logo, vai estar linkado as tasks.
+
+Aí, é so atualizar o GET para retornar rows com USERID igual.

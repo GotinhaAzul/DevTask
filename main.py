@@ -1,34 +1,22 @@
-import sqlite3
+from dataclasses import asdict
+from time import sleep
 
+import requests
+
+from mycode.constants import LOCALHOST
 from mycode.exceptions import TaskNotFoundError
+from mycode.helpers import localhost_up, raise_for_api, setup, show_tasks
 from mycode.logger import logs
 from mycode.storage import Storage
-from mycode.taskmanager import TaskManager
 from mycode.tasks import Task
 
 
-
-def setup(filename = 'database.db') -> None:
-    # STATUS default 0 para False
-    connection = sqlite3.connect(filename)
-    try:
-        cursor = connection.cursor()
-        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0) """)
-        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)") # Reduntante. Vou manter apenas para não me esquecer e caso, no futuro, use uma forma diferente de ID (Irei...)
-        connection.commit()
-        connection.close()
-    finally:
-        connection.close()
-
-
 def main() -> None:
-    setup()
     logger = logs()
     storage = Storage()
-    manager = TaskManager(storage=storage)
     try:
         while True:
-            print("\n1. Criar Tarefa")
+            print("1. Criar Tarefa")
             print("2. Listar Tarefas")
             print("3. Editar Tarefa")
             print("4. Excluir Tarefa")
@@ -40,24 +28,37 @@ def main() -> None:
                     print("Nome inválido!")
                     continue
                 task = Task(nome=nome)
-                manager.add_task(task)
+                requests.post(f"{LOCALHOST}/tasks", json=asdict(task))
+
                 logger.process(f"Criou task '{nome}' com ID {task.id}")
                 print(f"Task '{nome}' criada com ID {task.id}!")
 
             elif esc == "2":
-                print(manager.list_all())
-                resp = input("\nEnter para voltar ou ID para alternar conclusão: ").strip()
-                if resp and resp.isdigit():
-                    try:
-                        manager.toggle_done(int(resp))
-                        logger.process(f"Alternou conclusão da task ID {resp}")
-                    except TaskNotFoundError:
-                        print("ID inválido! Task não encontrada.")
+                show_tasks()
+
+                task_id = input("Enter para voltar ou ID para alternar conclusão: ").strip()
+                if not task_id.isdigit():
+                    print("Insira um id de task válido!")
+                    continue
+
+                try:
+                    response = requests.get(f"{LOCALHOST}/tasks",params={"id": int(task_id)})
+                    raise_for_api(response)
+
+                    items = response.json()["items"]
+                    if not items:
+                        raise TaskNotFoundError(f"Task de ID {task_id} não encontrada.")
+
+                    task = Task(**items[0])
+                    response = requests.patch(f"{LOCALHOST}/tasks/{task_id}",json={"done": not task.done})
+                    raise_for_api(response)
+                    logger.process(f"Alternou conclusão da task ID {task_id}")
+
+                except TaskNotFoundError:
+                    print("Task não encontrada.")
 
             elif esc == "3":
-                tasks = manager.list_all()
-                for task in tasks:
-                    print(f"[{'✓' if task.done else '-'}] {task.id}: {task.nome}")
+                show_tasks()
 
                 resp = input("ID da task para editar: ").strip()
                 if not resp.isdigit():
@@ -68,20 +69,21 @@ def main() -> None:
                     print("Nome inválido!")
                     continue
                 try:
-                    manager.update_name(int(resp), novo_nome)
+                    requests.patch(f"{LOCALHOST}/tasks/{resp}", json={"nome": novo_nome})
                     logger.process(f"Renomeou task ID {resp} para '{novo_nome}'")
                     print("Nome atualizado!")
                 except TaskNotFoundError:
                     print("ID inválido! Task não encontrada.")
 
             elif esc == "4":
-                manager.list_all()
+                show_tasks()
+
                 resp = input("ID da task para excluir: ").strip()
                 if not resp.isdigit():
                     print("ID inválido!")
                     continue
                 try:
-                    manager.delete(int(resp))
+                    requests.delete(f"{LOCALHOST}/tasks/{resp}")
                     logger.process(f"Removeu task ID {resp}")
                     print("Task removida!")
                 except TaskNotFoundError:
@@ -94,4 +96,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    localhost_up()
+    sleep(1)
+    setup()
+    print()
+    print("DevTask ------------------")
     main()

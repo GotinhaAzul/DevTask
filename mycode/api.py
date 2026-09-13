@@ -68,6 +68,7 @@ def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(g
         if "done" in data.model_fields_set and data.done is not None:
             manager.set_done(task_id, data.done)
         return manager.get(task_id)
+
     except TaskValidationError:
         raise HTTPException(status_code=422, detail=f"Task de nome inválido.")
 

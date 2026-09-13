@@ -24,5 +24,4 @@ cursor.execute(sql, params)
 
 
 
-
 Talvez padronizar a verificação futuramente com uma função.
