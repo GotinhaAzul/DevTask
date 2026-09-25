@@ -12,7 +12,7 @@ from mycode.taskmanager import TaskManager
 def test_api_list(file="testapi.db"):
     setup(file)
     storage = Storage(database=file)
-    storage.add(Task(nome="Tester"))
+    storage.add(Task(nome="Tester"), user_id)
     manager = TaskManager(storage=storage)
 
     app.dependency_overrides[get_manager] = lambda: manager

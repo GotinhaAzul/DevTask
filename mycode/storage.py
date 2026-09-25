@@ -1,5 +1,6 @@
-from mycode.tasks import Task
 import sqlite3
+
+from mycode.tasks import Task
 
 
 class Storage:
@@ -8,20 +9,19 @@ class Storage:
         self.conn = sqlite3.connect(self.database, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
 
-    def add(self, task: Task)-> None:
+    def add(self, task: Task, user_id: int)-> None:
         cursor = self.conn.cursor()
         cursor.execute(
-            "INSERT INTO tasks (name, status) VALUES (?, ?)",
-            (task.nome, task.done),
+            "INSERT INTO tasks (name, status, USERID) VALUES (?, ?, ?)",
+            (task.nome, task.done, user_id),
         )
         task.id = cursor.lastrowid
         self.conn.commit()
 
-    def delete(self, taskid: int):
+    def delete(self, taskid: int, user_id: int):
         cursor = self.conn.cursor()
-        query = "DELETE FROM tasks WHERE id = ?"
-        id_to_delete = (taskid,)
-        cursor.execute(query, id_to_delete)
+        query = "DELETE FROM tasks WHERE id = ? AND USERID = ?"
+        cursor.execute(query, (taskid, user_id))
         self.conn.commit()
 
 
@@ -33,27 +33,27 @@ class Storage:
 
         return content
 
-    def update(self, task: Task) -> None:
+    def update(self, task: Task, user_id: int) -> None:
         cursor = self.conn.cursor()
-        cursor.execute("UPDATE tasks SET name = ?, status = ? WHERE id = ?", (task.nome, task.done, task.id))
+        cursor.execute("UPDATE tasks SET name = ?, status = ? WHERE id = ? AND USERID = ?", (task.nome, task.done, task.id, user_id))
         self.conn.commit()
 
 
-    def getbyid(self, taskid: int) -> Task | None:
+    def getbyid(self, taskid: int, user_id: int) -> Task | None:
         cursor = self.conn.cursor()
-        cursor.execute("SELECT * FROM tasks WHERE ID = ?", (taskid,))
+        cursor.execute("SELECT * FROM tasks WHERE ID = ? AND USERID = ?", (taskid, user_id))
         content = cursor.fetchone()
         if content == None:
             return None
         else:
             return Task(nome=content['name'], id=content[1], done=bool(content[2]))
 
-    def read_sorted(self, sort_by: str, descending: bool = False) -> list[Task]:
+    def read_sorted(self, sort_by: str, user_id: int, descending: bool = False,) -> list[Task]:
         SORT_COLUMNS = {"id": "ID", "done": "STATUS"}
         column = SORT_COLUMNS.get(sort_by, "ID")
         direction = "DESC" if descending else "ASC"
         cursor = self.conn.cursor()
-        cursor.execute(f"SELECT * FROM tasks ORDER BY {column} {direction}")
+        cursor.execute(f"SELECT * FROM tasks WHERE USERID = ? ORDER BY {column} {direction}", (user_id,))
         content = [Task(nome=row['name'], id=row[1], done=bool(row[2])) for row in cursor.fetchall()]
         return content
 

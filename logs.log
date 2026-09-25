@@ -119,3 +119,44 @@ DEBUG:mycode.logger:Removeu task ID 8
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
 INFO:mycode.logger:GET /tasks Completado em 0.0107s
 DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 163
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0211s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 163
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0093s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks?id=5 HTTP/1.1" 200 90
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:PATCH /tasks/5 Completado em 0.0188s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/5 HTTP/1.1" 200 38
+DEBUG:mycode.logger:Alternou conclusão da task ID 5
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0079s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 162
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0087s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 162
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:DELETE /tasks/5 Completado em 0.0229s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "DELETE /tasks/5 HTTP/1.1" 204 0
+DEBUG:mycode.logger:Removeu task ID 5
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0091s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 123
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:POST /tasks Completado em 0.0188s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /tasks HTTP/1.1" 201 46
+DEBUG:mycode.logger:Criou task 'Falar com a Ale' com ID None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0085s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 170
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0094s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks?id=9 HTTP/1.1" 200 97
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:PATCH /tasks/9 Completado em 0.0179s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/9 HTTP/1.1" 200 45
+DEBUG:mycode.logger:Alternou conclusão da task ID 9
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:GET /tasks Completado em 0.0076s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 169

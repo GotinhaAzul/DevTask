@@ -9,15 +9,18 @@ from mycode.exceptions import TaskNotFoundError, TaskValidationError
 from mycode.tasks import Task
 
 
-def setup(filename = 'database.db') -> None:
+def setup(filename: str = 'database.db') -> None:
     # STATUS default 0 para False
     connection = sqlite3.connect(filename)
     try:
         cursor = connection.cursor()
-        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0) """)
-        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)") # Reduntante. Vou manter apenas para não me esquecer e caso, no futuro, use uma forma diferente de ID (Irei...)
+        cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0, USERID INTEGER) """)
+        cursor.execute("""CREATE TABLE IF NOT EXISTS users (USERNAME TEXT, PASSWORD TEXT, USERID INTEGER PRIMARY KEY AUTOINCREMENT) """)
+        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)")
+        columns = [row[1] for row in cursor.execute("PRAGMA table_info(tasks)").fetchall()]
+        if "USERID" not in columns:
+            cursor.execute("ALTER TABLE tasks ADD COLUMN USERID INTEGER")
         connection.commit()
-        connection.close()
     finally:
         connection.close()
 
