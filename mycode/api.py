@@ -1,25 +1,35 @@
+import sqlite3
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
-
-from mycode.exceptions import TaskNotFoundError, TaskValidationError
+from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
 from mycode.logger import LoggingMiddleware
-from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate
-from mycode.storage import Storage
+from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate, UserIn, UserOut
+from mycode.task_storage import Task_Storage
 from mycode.taskmanager import TaskManager
 from mycode.tasks import Task
-
+from mycode.user_storage import User_Storage
+from mycode.usermanager import UserManager
+from mycode.users import User
 
 app = FastAPI()
 add_pagination(app)
 app.add_middleware(LoggingMiddleware)
 
 def get_manager():
-    storage = Storage()
+    storage = Task_Storage()
     try:
         yield TaskManager(storage=storage)
+    finally:
+        storage.close()
+
+
+def get_user_manager():
+    storage = User_Storage()
+    try:
+        yield UserManager(storage=storage)
     finally:
         storage.close()
 
@@ -48,7 +58,7 @@ def add_task(task_in: TaskIn, user_id: int,  manager: TaskManager = Depends(get_
     task = Task(nome=task_in.nome, done=task_in.done)
     try:
         manager.add_task(task, user_id)
-    except (ValueError, TaskValidationError):
+    except (ValueError, ValidationError):
         raise HTTPException(status_code=422, detail="Task inválida!")
     return task
 
@@ -70,8 +80,22 @@ def update_task(task_id: int, user_id: int, data: TaskUpdate, manager: TaskManag
             manager.set_done(task_id, user_id, data.done)
         return manager.get(task_id, user_id)
 
-    except TaskValidationError:
+    except ValidationError:
         raise HTTPException(status_code=422, detail=f"Task de nome inválido.")
 
     except TaskNotFoundError:
         raise HTTPException(status_code=404, detail=f"Task de ID {task_id} não encontrada!")
+
+
+@app.post("/register", status_code=201, response_model=UserOut)
+def register_user(user_in: UserIn, user_id: int, manager: UserManager = Depends(get_user_manager)) -> User:
+    user = User(username=user_in.username, password=user_in.password)
+    try:
+        manager.add_user(user, user_id)
+    except UserAlreadyExistsError:
+        raise HTTPException(status_code=409, detail="Usuário já existe!")
+    except ValidationError:
+        raise HTTPException(status_code=422, detail="Usuário inválido!")
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=409, detail="USERID ou username já em uso!")
+    return user

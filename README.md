@@ -1,9 +1,31 @@
-storage.py - Toma conta de realizar as ações CRUD
+DevTask é uma aplicação simples de To-Dos.
 
-taskmanager.py - Recebe objetos tasks, os edita e chama storage para adiciona-los no banco de dados
+Ela está dividida em duas principais partes: Users e Tasks.
 
-Tasks - dataclass que serve para guardar informações das task do usuário.
+# Tasks
 
-logger.py - Log simples, chamado em main.py
+As tasks são objetos dataclass (tasks.py) que são modificados e alterados pelo taskmanager e então armazenados em sqlite pelo storage.
 
-seeds.py - Popula o banco de dados com tarefas repetidas para testes, apenas roda se for chamada.
+A arquitetura simples desse sistema é a seguinte:
+
+CLI -> API -> TaskManager -> Storage
+
+# Users
+
+Os users são dataclass (users.py) gerenciados pelo usermanager e persistidos em sqlite pelo user_storage.
+
+Arquitetura: API -> UserManager -> User_Storage
+
+## POST /register?user_id={id}
+
+Body (`UserIn`):
+```json
+{"username": "alice", "password": "secret"}
+```
+
+- `201` -> `{"username": "alice", "id": 1}` (nunca retorna senha)
+- `409` -> username ou USERID já em uso
+- `422` -> username/senha inválidos
+
+Por enquanto `user_id` vem na request como query param. No futuro será extraído do JWT.
+Sem hash por enquanto (senha em texto puro). Ver `journal.md` / issue do Épico 5 para o plano de hash com bcrypt.

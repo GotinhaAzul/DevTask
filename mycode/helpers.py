@@ -5,7 +5,7 @@ import requests
 import uvicorn
 
 from mycode.constants import LOCALHOST, LOCALHOST_NAME, LOCALHOST_PORT
-from mycode.exceptions import TaskNotFoundError, TaskValidationError
+from mycode.exceptions import TaskNotFoundError, ValidationError
 from mycode.tasks import Task
 
 
@@ -17,6 +17,7 @@ def setup(filename: str = 'database.db') -> None:
         cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0, USERID INTEGER) """)
         cursor.execute("""CREATE TABLE IF NOT EXISTS users (USERNAME TEXT, PASSWORD TEXT, USERID INTEGER PRIMARY KEY AUTOINCREMENT) """)
         cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)")
+        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username)")
         columns = [row[1] for row in cursor.execute("PRAGMA table_info(tasks)").fetchall()]
         if "USERID" not in columns:
             cursor.execute("ALTER TABLE tasks ADD COLUMN USERID INTEGER")
@@ -37,7 +38,7 @@ def raise_for_api(response: requests.Response) -> None:
 
     if response.status_code == 422:
         detail = response.json().get("detail", "Dados inválidos.")
-        raise TaskValidationError(detail)
+        raise ValidationError(detail)
 
     response.raise_for_status()
 

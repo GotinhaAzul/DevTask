@@ -3,5 +3,13 @@ class TaskNotFoundError(Exception):
 
 
 
-class TaskValidationError(Exception):
+class ValidationError(Exception):
     """Lançada quando os dados fornecidos são inválidos."""
+
+
+class UserNotFoundError(Exception):
+    """Lançada quando um user com o username solicitado não existe."""
+
+
+class UserAlreadyExistsError(Exception):
+    """Lançada quando o username já está em uso."""
