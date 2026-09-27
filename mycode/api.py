@@ -5,6 +5,7 @@ from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
 
 from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
+from mycode.helpers import get_current_user_id
 from mycode.logger import LoggingMiddleware
 from mycode.schemas import TaskFilter, TaskIn, TaskOut, TaskUpdate, UserIn, UserOut
 from mycode.task_storage import Task_Storage
@@ -37,8 +38,8 @@ def get_user_manager():
 @app.get("/tasks", response_model=Page[TaskOut]) # Não sei porque o return type é unknown.
 def list_tasks(
     query: Annotated[TaskFilter, Query(description="Insert search parameters to search for it.")],
-    user_id: int,
     taskmanager: TaskManager = Depends(get_manager),
+    user_id: int = Depends(get_current_user_id)
 ) -> Page[TaskOut]:
 
     tasks = taskmanager.get_sorted(query.sort_by, user_id, query.descending)
@@ -54,7 +55,7 @@ def list_tasks(
 
 
 @app.post("/tasks", status_code=201, response_model=TaskOut)
-def add_task(task_in: TaskIn, user_id: int,  manager: TaskManager = Depends(get_manager)) -> Task:
+def add_task(task_in: TaskIn,  manager: TaskManager = Depends(get_manager), user_id: int = Depends(get_current_user_id)) -> Task:
     task = Task(nome=task_in.nome, done=task_in.done)
     try:
         manager.add_task(task, user_id)
@@ -64,7 +65,7 @@ def add_task(task_in: TaskIn, user_id: int,  manager: TaskManager = Depends(get_
 
 
 @app.delete("/tasks/{task_id}", status_code=204)
-def delete_task(task_id: int, user_id: int, manager: TaskManager = Depends(get_manager)) -> None:
+def delete_task(task_id: int, manager: TaskManager = Depends(get_manager), user_id: int = Depends(get_current_user_id)) -> None:
     try:
         manager.delete(task_id, user_id)
     except TaskNotFoundError:
@@ -72,7 +73,7 @@ def delete_task(task_id: int, user_id: int, manager: TaskManager = Depends(get_m
 
 
 @app.patch("/tasks/{task_id}", status_code=200, response_model=TaskOut)
-def update_task(task_id: int, user_id: int, data: TaskUpdate, manager: TaskManager = Depends(get_manager)) ->  Task | None:
+def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(get_manager), user_id: int = Depends(get_current_user_id)) ->  Task | None:
     try:
         if "nome" in data.model_fields_set and data.nome is not None: # Verifica se o nome veio + se ele não é None
             manager.update_name(task_id, user_id, data.nome)
@@ -88,10 +89,10 @@ def update_task(task_id: int, user_id: int, data: TaskUpdate, manager: TaskManag
 
 
 @app.post("/register", status_code=201, response_model=UserOut)
-def register_user(user_in: UserIn, user_id: int, manager: UserManager = Depends(get_user_manager)) -> User:
+def register_user(user_in: UserIn, manager: UserManager = Depends(get_user_manager)) -> User:
     user = User(username=user_in.username, password=user_in.password)
     try:
-        manager.add_user(user, user_id)
+        manager.add_user(user)
     except UserAlreadyExistsError:
         raise HTTPException(status_code=409, detail="Usuário já existe!")
     except ValidationError:
@@ -99,3 +100,14 @@ def register_user(user_in: UserIn, user_id: int, manager: UserManager = Depends(
     except sqlite3.IntegrityError:
         raise HTTPException(status_code=409, detail="USERID ou username já em uso!")
     return user
+
+@app.post("/login", status_code=200, response_model=UserOut)
+def login_user(user_in: UserIn, manager: UserManager = Depends(get_user_manager)) -> UserOut | None:
+    user = User(username=user_in.username, password=user_in.password)
+    successful = manager.verify_user(user.username, user.password)
+    if successful:
+        user = manager.get(user.username)
+        if user != None:
+            return UserOut(username=user.username, userID=user.userID)
+    else:
+        raise HTTPException(status_code=401, detail="User talvez não exista!")

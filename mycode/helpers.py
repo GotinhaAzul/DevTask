@@ -15,7 +15,7 @@ def setup(filename: str = 'database.db') -> None:
     try:
         cursor = connection.cursor()
         cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (NAME TEXT, ID INTEGER PRIMARY KEY AUTOINCREMENT, STATUS BOOLEAN NOT NULL DEFAULT 0, USERID INTEGER) """)
-        cursor.execute("""CREATE TABLE IF NOT EXISTS users (USERNAME TEXT, PASSWORD TEXT, USERID INTEGER PRIMARY KEY AUTOINCREMENT) """)
+        cursor.execute("""CREATE TABLE IF NOT EXISTS users (USERNAME TEXT, PASSWORD TEXT, USERID INTEGER PRIMARY KEY) """)
         cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_id ON tasks(id)")
         cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username)")
         columns = [row[1] for row in cursor.execute("PRAGMA table_info(tasks)").fetchall()]
@@ -58,3 +58,6 @@ def show_tasks():
     for task in tasks:
         status = "✓" if task.done else "-"
         print(f"[{status}] {task.id}: {task.nome}")
+
+def get_current_user_id(user_id: int):
+    return user_id

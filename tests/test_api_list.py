@@ -4,8 +4,6 @@ from fastapi.testclient import TestClient
 
 from main import setup
 from mycode.api import app, get_manager
-from mycode.storage import Storage
-from mycode.tasks import Task
 from mycode.taskmanager import TaskManager
 
 

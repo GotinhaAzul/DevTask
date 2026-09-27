@@ -1,12 +1,12 @@
 from main import setup
-from mycode.storage import Storage
 from mycode.tasks import Task
 from pathlib import Path
+from mycode.task_storage import Task_Storage
 
 
 def test_add_and_read(file = "testdatabase.db"):
     setup(file)
-    storage = Storage(database=file)
+    storage = Task_Storage(database=file)
     task = Task(nome="Ola!")
     storage.add(task)
     subject = storage.getbyid(task.id)
@@ -20,7 +20,7 @@ def test_add_and_read(file = "testdatabase.db"):
 
 def test_update_and_delete(file="testdatabase.db"):
     setup(file)
-    storage = Storage(database=file)
+    storage = Task_Storage(database=file)
     task = Task(nome="Ola!")
     storage.add(task)
     file_path = Path(file)

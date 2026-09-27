@@ -1,5 +1,4 @@
 from mycode.helpers import setup
-from mycode.storage import Storage
 from mycode.tasks import Task
 from mycode.constants import DEMO_USER_ID
 

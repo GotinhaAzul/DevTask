@@ -7,7 +7,6 @@ from mycode.constants import LOCALHOST
 from mycode.exceptions import TaskNotFoundError
 from mycode.helpers import localhost_up, raise_for_api, setup, show_tasks
 from mycode.logger import logs
-from mycode.storage import Storage
 from mycode.tasks import Task
 
 

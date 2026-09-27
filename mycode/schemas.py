@@ -39,5 +39,5 @@ class UserIn(BaseModel):
 
 class UserOut(BaseModel):
     username: str
-    id: int | None = None
+    userID: int | None = None
     model_config = ConfigDict(from_attributes=True)

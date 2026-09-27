@@ -1,11 +1,11 @@
-from mycode.exceptions import TaskNotFoundError, TaskValidationError
-from mycode.storage import Storage
-from mycode.tasks import Task
 from mycode.constants import TASK_NAME_MAX_LENGTH, TASK_NAME_MIN_LENGTH
+from mycode.exceptions import TaskNotFoundError, ValidationError
+from mycode.task_storage import Task_Storage
+from mycode.tasks import Task
 
 
 class TaskManager:
-    def __init__(self, storage: Storage) -> None:
+    def __init__(self, storage: Task_Storage) -> None:
         self._storage = storage
 
     def toggle_done(self, task_id: int, user_id: int) -> None:
@@ -24,7 +24,7 @@ class TaskManager:
 
         new_name = new_name.strip()
         if len(new_name) < TASK_NAME_MIN_LENGTH or len(new_name) > TASK_NAME_MAX_LENGTH:
-            raise TaskValidationError("Nome inválido.")
+            raise ValidationError("Nome inválido.")
 
 
         task.nome = new_name
@@ -42,7 +42,7 @@ class TaskManager:
         if len(task.nome) >= TASK_NAME_MIN_LENGTH and len(task.nome) <= TASK_NAME_MAX_LENGTH:
             self._storage.add(task, user_id)
         else:
-            raise TaskValidationError("Task com nome grande/pequeno demais.")
+            raise ValidationError("Task com nome grande/pequeno demais.")
 
     def get(self, task_id: int, user_id: int) -> Task | None:
         return self._storage.getbyid(task_id, user_id)

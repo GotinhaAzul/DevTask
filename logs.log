@@ -160,3 +160,51 @@ DEBUG:mycode.logger:Alternou conclusão da task ID 9
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
 INFO:mycode.logger:GET /tasks Completado em 0.0076s
 DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 169
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0116s
+INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 201 Created"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0035s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0023s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0031s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0121s
+INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 201 Created"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0026s
+INFO:httpx:HTTP Request: POST http://testserver/register?user_id=11 "HTTP/1.1 409 Conflict"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0027s
+INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 409 Conflict"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0034s
+INFO:httpx:HTTP Request: POST http://testserver/register?user_id=12 "HTTP/1.1 422 Unprocessable Entity"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0032s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0026s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0029s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0024s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0118s
+INFO:httpx:HTTP Request: POST http://testserver/register "HTTP/1.1 201 Created"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0035s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /tasks Completado em 0.0033s
+INFO:httpx:HTTP Request: POST http://testserver/tasks?user_id= "HTTP/1.1 422 Unprocessable Entity"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:GET /tasks Completado em 0.0055s
+INFO:httpx:HTTP Request: GET http://testserver/tasks?user_id= "HTTP/1.1 422 Unprocessable Entity"

@@ -18,7 +18,7 @@ class UserManager:
 
         self._storage.delete(username)
 
-    def add_user(self, user: User, user_id: int) -> None:
+    def add_user(self, user: User) -> None:
         user.username = user.username.strip()
         if len(user.username) < USER_NAME_MIN_LENGTH or len(user.username) > USER_NAME_MAX_LENGTH:
             raise ValidationError("User com nome grande/pequeno demais.")
@@ -26,7 +26,12 @@ class UserManager:
         if self._storage.getbyusername(user.username) is not None:
             raise UserAlreadyExistsError(f"User '{user.username}' já existe.")
 
-        self._storage.add(user, user_id)
+        self._storage.add(user)
 
     def get(self, username: str) -> User | None:
         return self._storage.getbyusername(username)
+
+    def verify_user(self, username: str, password: str):
+        user = self.get(username)
+        if user:
+            return user.password == password

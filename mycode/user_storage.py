@@ -1,6 +1,7 @@
 import sqlite3
 
 from mycode.users import User
+from secrets import randbits
 
 
 class User_Storage:
@@ -9,14 +10,15 @@ class User_Storage:
         self.conn = sqlite3.connect(self.database, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
 
-    def add(self, user: User, user_id: int)-> None:
+    def add(self, user: User)-> None:
+        user_id = randbits(63)
         cursor = self.conn.cursor()
         cursor.execute(
             "INSERT INTO users (username, password, USERID) VALUES (?, ?, ?)",
             (user.username, user.password, user_id),
         )
         self.conn.commit()
-        user.id = user_id
+        user.userID = user_id
 
 
     def delete(self, username: str):
@@ -36,4 +38,4 @@ class User_Storage:
         if content == None:
             return None
         else:
-            return User(username=content["username"], password=content["password"], id=content["USERID"])
+            return User(username=content["username"], password=content["password"], userID=content["USERID"])

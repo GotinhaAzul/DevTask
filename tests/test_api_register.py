@@ -28,11 +28,11 @@ def test_register_success():
     file = "testregister.db"
     client, storage = _client_with_temp_db(file)
     try:
-        response = client.post("/register", params={"user_id": 1}, json={"username": "alice", "password": "secret"})
+        response = client.post("/register", json={"username": "alice", "password": "secret"})
         assert response.status_code == 201
         body = response.json()
         assert body["username"] == "alice"
-        assert body["id"] == 1
+        assert isinstance(body["userID"], int)
         assert "password" not in body
     finally:
         _teardown(file, storage)
@@ -42,10 +42,10 @@ def test_register_duplicate_username_returns_409():
     file = "testregister.db"
     client, storage = _client_with_temp_db(file)
     try:
-        r1 = client.post("/register", params={"user_id": 1}, json={"username": "bob", "password": "secret"})
+        r1 = client.post("/register", json={"username": "bob", "password": "secret"})
         assert r1.status_code == 201
 
-        r2 = client.post("/register", params={"user_id": 2}, json={"username": "bob", "password": "other"})
+        r2 = client.post("/register", json={"username": "bob", "password": "other"})
         assert r2.status_code == 409
         assert "detail" in r2.json()
     finally:
@@ -56,20 +56,25 @@ def test_register_invalid_username_returns_422():
     file = "testregister.db"
     client, storage = _client_with_temp_db(file)
     try:
-        response = client.post("/register", params={"user_id": 1}, json={"username": "   ", "password": "secret"})
+        response = client.post("/register", json={"username": "   ", "password": "secret"})
         assert response.status_code == 422
     finally:
         _teardown(file, storage)
 
 
-def test_register_duplicate_userid_returns_409():
+def test_register_generates_unpredictable_ids():
     file = "testregister.db"
     client, storage = _client_with_temp_db(file)
     try:
-        r1 = client.post("/register", params={"user_id": 5}, json={"username": "carol", "password": "secret"})
+        r1 = client.post("/register", json={"username": "carol", "password": "secret"})
         assert r1.status_code == 201
 
-        r2 = client.post("/register", params={"user_id": 5}, json={"username": "dave", "password": "secret"})
-        assert r2.status_code == 409
+        r2 = client.post("/register", json={"username": "dave", "password": "secret"})
+        assert r2.status_code == 201
+
+        id1 = r1.json()["userID"]
+        id2 = r2.json()["userID"]
+        assert isinstance(id1, int) and isinstance(id2, int)
+        assert id1 != id2
     finally:
         _teardown(file, storage)
