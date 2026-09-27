@@ -4,21 +4,29 @@ from time import sleep
 import requests
 
 from mycode.constants import LOCALHOST
-from mycode.exceptions import TaskNotFoundError
-from mycode.helpers import localhost_up, raise_for_api, setup, show_tasks
+from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
+from mycode.helpers import (
+    localhost_up,
+    login_register_flow,
+    raise_for_api,
+    setup,
+    show_tasks,
+)
 from mycode.logger import logs
 from mycode.tasks import Task
 
 
-def main() -> None:
+def main(user) -> None:
+    username = user.username
+    userID = user.userID
     logger = logs()
-    storage = Storage()
-    try:
-        while True:
+    while True:
+            print(f"Usuário: {username}")
             print("1. Criar Tarefa")
             print("2. Listar Tarefas")
             print("3. Editar Tarefa")
             print("4. Excluir Tarefa")
+            print("5. Logout")
             esc = input(">>> ")
 
             if esc == "1":
@@ -27,13 +35,13 @@ def main() -> None:
                     print("Nome inválido!")
                     continue
                 task = Task(nome=nome)
-                requests.post(f"{LOCALHOST}/tasks", json=asdict(task))
+                requests.post(f"{LOCALHOST}/tasks", json=asdict(task), params={"user_id": userID})
 
                 logger.process(f"Criou task '{nome}' com ID {task.id}")
                 print(f"Task '{nome}' criada com ID {task.id}!")
 
             elif esc == "2":
-                show_tasks()
+                show_tasks(userID)
 
                 task_id = input("Enter para voltar ou ID para alternar conclusão: ").strip()
                 if not task_id.isdigit():
@@ -41,7 +49,7 @@ def main() -> None:
                     continue
 
                 try:
-                    response = requests.get(f"{LOCALHOST}/tasks",params={"id": int(task_id)})
+                    response = requests.get(f"{LOCALHOST}/tasks",params={"id": int(task_id), "user_id": userID})
                     raise_for_api(response)
 
                     items = response.json()["items"]
@@ -49,7 +57,7 @@ def main() -> None:
                         raise TaskNotFoundError(f"Task de ID {task_id} não encontrada.")
 
                     task = Task(**items[0])
-                    response = requests.patch(f"{LOCALHOST}/tasks/{task_id}",json={"done": not task.done})
+                    response = requests.patch(f"{LOCALHOST}/tasks/{task_id}",json={"done": not task.done}, params={"user_id": userID})
                     raise_for_api(response)
                     logger.process(f"Alternou conclusão da task ID {task_id}")
 
@@ -57,7 +65,7 @@ def main() -> None:
                     print("Task não encontrada.")
 
             elif esc == "3":
-                show_tasks()
+                show_tasks(userID)
 
                 resp = input("ID da task para editar: ").strip()
                 if not resp.isdigit():
@@ -68,36 +76,48 @@ def main() -> None:
                     print("Nome inválido!")
                     continue
                 try:
-                    requests.patch(f"{LOCALHOST}/tasks/{resp}", json={"nome": novo_nome})
+                    requests.patch(f"{LOCALHOST}/tasks/{resp}", json={"nome": novo_nome}, params={"user_id": userID})
                     logger.process(f"Renomeou task ID {resp} para '{novo_nome}'")
                     print("Nome atualizado!")
                 except TaskNotFoundError:
                     print("ID inválido! Task não encontrada.")
 
             elif esc == "4":
-                show_tasks()
+                show_tasks(userID)
 
                 resp = input("ID da task para excluir: ").strip()
                 if not resp.isdigit():
                     print("ID inválido!")
                     continue
                 try:
-                    requests.delete(f"{LOCALHOST}/tasks/{resp}")
+                    requests.delete(f"{LOCALHOST}/tasks/{resp}", params={"user_id": userID})
                     logger.process(f"Removeu task ID {resp}")
                     print("Task removida!")
                 except TaskNotFoundError:
                     print("ID inválido! Task não encontrada.")
 
+            elif esc == "5":
+                username = None
+                userID = None
+                return
+
             else:
                 print("Opção inválida!")
-    finally:
-        storage.close()
+
+
+
 
 
 if __name__ == "__main__":
     localhost_up()
     sleep(1)
     setup()
-    print()
-    print("DevTask ------------------")
-    main()
+    while True:
+        print("\n")
+        print("DevTask ------------------")
+        user = login_register_flow()
+        if user != None:
+            main(user)
+        else:
+            print("Verificação falhou! Reinicializando...")
+            continue

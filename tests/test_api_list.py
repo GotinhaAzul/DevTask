@@ -4,13 +4,15 @@ from fastapi.testclient import TestClient
 
 from main import setup
 from mycode.api import app, get_manager
+from mycode.task_storage import Task_Storage
 from mycode.taskmanager import TaskManager
+from mycode.tasks import Task
 
 
 def test_api_list(file="testapi.db"):
     setup(file)
-    storage = Storage(database=file)
-    storage.add(Task(nome="Tester"), user_id)
+    storage = Task_Storage(database=file)
+    storage.add(Task(nome="Tester"), user_id=0)
     manager = TaskManager(storage=storage)
 
     app.dependency_overrides[get_manager] = lambda: manager

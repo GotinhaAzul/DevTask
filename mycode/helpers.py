@@ -1,3 +1,4 @@
+from dataclasses import asdict
 import sqlite3
 import threading
 
@@ -5,8 +6,10 @@ import requests
 import uvicorn
 
 from mycode.constants import LOCALHOST, LOCALHOST_NAME, LOCALHOST_PORT
-from mycode.exceptions import TaskNotFoundError, ValidationError
+from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
+from mycode.schemas import UserIn, UserOut
 from mycode.tasks import Task
+from mycode.users import User
 
 
 def setup(filename: str = 'database.db') -> None:
@@ -40,6 +43,13 @@ def raise_for_api(response: requests.Response) -> None:
         detail = response.json().get("detail", "Dados inválidos.")
         raise ValidationError(detail)
 
+    if response.status_code == 401:
+        detail = response.json().get("detail", "Login Recusado.")
+        raise ValidationError(detail)
+    if response.status_code == 409:
+        detail = response.json().get("detail", "Conflito de cadastro.")
+        raise ValidationError(detail)
+
     response.raise_for_status()
 
 def startlocalhost():
@@ -50,8 +60,8 @@ def localhost_up():
     background_thread.start()
 
 
-def show_tasks():
-    response = requests.get(f"{LOCALHOST}/tasks")
+def show_tasks(userID: int):
+    response = requests.get(f"{LOCALHOST}/tasks", params={"user_id": userID})
     raise_for_api(response)
 
     tasks = [Task(**item) for item in response.json()["items"]]
@@ -61,3 +71,36 @@ def show_tasks():
 
 def get_current_user_id(user_id: int):
     return user_id
+
+def login_register_flow():
+    print("1. for Login")
+    print("2. for Register")
+    esc = input()
+    match esc:
+        case "1":
+            user = login()
+            return user
+        case "2":
+            user = register()
+            return user
+
+def login():
+    username = input("Insira seu username: ")
+    password = input("Insira a sua senha: ")
+    user = UserIn(username=username, password=password)
+    response = requests.post(f"{LOCALHOST}/login", json=asdict(user))
+    raise_for_api(response)
+    response = response.json()
+    user = UserOut(username=response["username"], userID=response["userID"])
+    return user
+
+def register():
+    username = input("Insira um nome de usuário: ")
+    password = input("Insira a sua senha: ")
+    user = User(username=username, password=password)
+    response = requests.post(f"{LOCALHOST}/register", json={"username": user.username, "password": user.password})
+    raise_for_api(response)
+    response = response.json()
+    user = UserOut(username=response["username"], userID=response["userID"])
+    print("Usuário criado com sucesso!")
+    return user

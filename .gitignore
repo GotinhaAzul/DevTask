@@ -1,2 +1,6 @@
 .pytest_cache
 database.db
+mycode/__pycache__/*
+testdatabase.db
+logs.log
+testapi.db

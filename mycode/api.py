@@ -82,7 +82,7 @@ def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(g
         return manager.get(task_id, user_id)
 
     except ValidationError:
-        raise HTTPException(status_code=422, detail=f"Task de nome inválido.")
+        raise HTTPException(status_code=422, detail="Task de nome inválido.")
 
     except TaskNotFoundError:
         raise HTTPException(status_code=404, detail=f"Task de ID {task_id} não encontrada!")
