@@ -10,6 +10,7 @@ from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, Validat
 from mycode.schemas import UserIn, UserOut
 from mycode.tasks import Task
 from mycode.users import User
+from argon2 import PasswordHasher
 
 
 def setup(filename: str = 'database.db') -> None:
@@ -53,7 +54,7 @@ def raise_for_api(response: requests.Response) -> None:
     response.raise_for_status()
 
 def startlocalhost():
-    uvicorn.run("mycode.api:app", host=LOCALHOST_NAME, port=LOCALHOST_PORT, reload=False)
+    uvicorn.run("mycode.api:app", host=LOCALHOST_NAME, port=LOCALHOST_PORT, reload=False, access_log=False, log_level="warning")
 
 def localhost_up():
     background_thread = threading.Thread(target=startlocalhost)
@@ -88,7 +89,7 @@ def login():
     username = input("Insira seu username: ")
     password = input("Insira a sua senha: ")
     user = UserIn(username=username, password=password)
-    response = requests.post(f"{LOCALHOST}/login", json=asdict(user))
+    response = requests.post(f"{LOCALHOST}/login", json={"username": user.username, "password": user.password})
     raise_for_api(response)
     response = response.json()
     user = UserOut(username=response["username"], userID=response["userID"])

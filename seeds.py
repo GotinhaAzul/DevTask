@@ -1,3 +1,4 @@
+from mycode.api import Task_Storage
 from mycode.helpers import setup
 from mycode.tasks import Task
 from mycode.constants import DEMO_USER_ID
@@ -5,7 +6,7 @@ from mycode.constants import DEMO_USER_ID
 
 def main(filename='database.db'):
     setup(filename)
-    storage = Storage(database=filename)
+    storage = Task_Storage(database=filename)
     try:
         if storage.read_sorted("id", DEMO_USER_ID):
             return

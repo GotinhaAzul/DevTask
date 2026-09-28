@@ -91,9 +91,9 @@ PATCH /tasks/{id}
 
 # Épico 5 — Usuários
 
-* [ ] Cadastro
-* [ ] Login
-* [ ] Logout
+* [x] Cadastro
+* [x] Login
+* [x] Logout
 * [ ] JWT
 * [ ] Refresh Token
 * [ ] Hash de senha

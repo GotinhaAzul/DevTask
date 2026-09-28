@@ -3,6 +3,7 @@ from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi_pagination import Page, add_pagination, paginate
+from argon2 import PasswordHasher
 
 from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
 from mycode.helpers import get_current_user_id
@@ -90,6 +91,8 @@ def update_task(task_id: int, data: TaskUpdate, manager: TaskManager = Depends(g
 
 @app.post("/register", status_code=201, response_model=UserOut)
 def register_user(user_in: UserIn, manager: UserManager = Depends(get_user_manager)) -> User:
+    ph = PasswordHasher()
+    user_in.password = ph.hash(user_in.password)
     user = User(username=user_in.username, password=user_in.password)
     try:
         manager.add_user(user)
@@ -111,3 +114,7 @@ def login_user(user_in: UserIn, manager: UserManager = Depends(get_user_manager)
             return UserOut(username=user.username, userID=user.userID)
     else:
         raise HTTPException(status_code=401, detail="User talvez não exista!")
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}

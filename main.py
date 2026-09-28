@@ -4,7 +4,7 @@ from time import sleep
 import requests
 
 from mycode.constants import LOCALHOST
-from mycode.exceptions import TaskNotFoundError, UserAlreadyExistsError, ValidationError
+from mycode.exceptions import TaskNotFoundError
 from mycode.helpers import (
     localhost_up,
     login_register_flow,

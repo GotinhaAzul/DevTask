@@ -12,9 +12,13 @@ mycode/exceptions.py
 mycode/helpers.py
 mycode/logger.py
 mycode/schemas.py
-mycode/storage.py
+mycode/task_storage.py
 mycode/taskmanager.py
 mycode/tasks.py
+mycode/user_storage.py
+mycode/usermanager.py
+mycode/users.py
 tests/test_api_list.py
+tests/test_api_register.py
 tests/test_storage.py
 tests/test_tasks.py

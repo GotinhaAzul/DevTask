@@ -1,210 +1,76 @@
-
-DEBUG:mycode.logger:Criou task 'Estudar' com ID 4335
-DEBUG:mycode.logger:Alternou conclusão da task ID 4335
-DEBUG:mycode.logger:Renomeou task ID 4335 para 'Nao estudar'
-DEBUG:mycode.logger:Removeu task ID 4335
-DEBUG:mycode.logger:Criou task 'Oi' com ID 7719
-DEBUG:mycode.logger:Removeu task ID 7719
-DEBUG:mycode.logger:Criou task 'ABC' com ID 6
-DEBUG:mycode.logger:Removeu task ID 6
-DEBUG:mycode.logger:Renomeou task ID 2 para 'Tomates'
-DEBUG:mycode.logger:Alternou conclusão da task ID 1
-DEBUG:mycode.logger:Alternou conclusão da task ID 2
-DEBUG:mycode.logger:Removeu task ID 1
-DEBUG:mycode.logger:Removeu task ID 2
-DEBUG:mycode.logger:Removeu task ID 3
-DEBUG:mycode.logger:Criou task 'Oi' com ID 7
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:GET /tasks Completado em 0.0495s
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:GET / Completado em 0.0006s
-INFO:mycode.logger:GET /favicon.ico Completado em 0.0008s
-INFO:mycode.logger:GET /tasks Completado em 0.0203s
-INFO:mycode.logger:GET /favicon.ico Completado em 0.0005s
-INFO:mycode.logger:GET /tasks/4 Completado em 0.0006s
-INFO:mycode.logger:GET /favicon.ico Completado em 0.0005s
-INFO:mycode.logger:GET /tasks Completado em 0.0120s
-INFO:mycode.logger:GET /favicon.ico Completado em 0.0004s
-INFO:mycode.logger:GET /tasks Completado em 0.0098s
-INFO:mycode.logger:GET /tasks/4 Completado em 0.0006s
-INFO:mycode.logger:GET /tasks Completado em 0.0112s
-INFO:mycode.logger:GET /tasks Completado em 0.0114s
-INFO:mycode.logger:GET /favicon.ico Completado em 0.0006s
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
 DEBUG:asyncio:Using selector: EpollSelector
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0166s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 164
+INFO:mycode.logger:POST /register Completado em 0.0134s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /register HTTP/1.1" 201 48
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:POST /tasks Completado em 0.0198s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /tasks HTTP/1.1" 201 38
-DEBUG:mycode.logger:Criou task 'Tomates' com ID None
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0117s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0103s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
+INFO:mycode.logger:POST /login Completado em 0.1022s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /login HTTP/1.1" 401 37
 DEBUG:asyncio:Using selector: EpollSelector
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0174s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
+INFO:mycode.logger:POST /login Completado em 0.0988s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /login HTTP/1.1" 401 37
 DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0169s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0156s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0167s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 203
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:PATCH /tasks/8 Completado em 0.0212s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/8 HTTP/1.1" 200 36
-DEBUG:mycode.logger:Renomeou task ID 8 para 'Abaco'
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0104s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 201
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0104s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 201
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0176s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 201
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0166s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 201
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:POST /tasks/8 Completado em 0.0008s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /tasks/8 HTTP/1.1" 405 31
-DEBUG:mycode.logger:Removeu task ID 8
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0100s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 201
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0101s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks?id=4 HTTP/1.1" 200 90
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:PATCH /tasks/4 Completado em 0.0203s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/4 HTTP/1.1" 200 38
-DEBUG:mycode.logger:Alternou conclusão da task ID 4
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0101s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 200
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0098s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 200
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:POST /tasks/8 Completado em 0.0004s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /tasks/8 HTTP/1.1" 405 31
-DEBUG:mycode.logger:Removeu task ID 8
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0170s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 200
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:DELETE /tasks/8 Completado em 0.0106s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "DELETE /tasks/8 HTTP/1.1" 204 0
-DEBUG:mycode.logger:Removeu task ID 8
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0107s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 163
-DEBUG:asyncio:Using selector: EpollSelector
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0211s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 163
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0093s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks?id=5 HTTP/1.1" 200 90
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:PATCH /tasks/5 Completado em 0.0188s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/5 HTTP/1.1" 200 38
-DEBUG:mycode.logger:Alternou conclusão da task ID 5
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0079s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 162
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0087s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 162
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:DELETE /tasks/5 Completado em 0.0229s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "DELETE /tasks/5 HTTP/1.1" 204 0
-DEBUG:mycode.logger:Removeu task ID 5
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0091s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 123
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:POST /tasks Completado em 0.0188s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /tasks HTTP/1.1" 201 46
-DEBUG:mycode.logger:Criou task 'Falar com a Ale' com ID None
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0085s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 170
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0094s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks?id=9 HTTP/1.1" 200 97
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:PATCH /tasks/9 Completado em 0.0179s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "PATCH /tasks/9 HTTP/1.1" 200 45
-DEBUG:mycode.logger:Alternou conclusão da task ID 9
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
-INFO:mycode.logger:GET /tasks Completado em 0.0076s
-DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "GET /tasks HTTP/1.1" 200 169
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0116s
-INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 201 Created"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0035s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0023s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0031s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0121s
-INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 201 Created"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0026s
-INFO:httpx:HTTP Request: POST http://testserver/register?user_id=11 "HTTP/1.1 409 Conflict"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0027s
-INFO:httpx:HTTP Request: POST http://testserver/register?user_id=10 "HTTP/1.1 409 Conflict"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0034s
-INFO:httpx:HTTP Request: POST http://testserver/register?user_id=12 "HTTP/1.1 422 Unprocessable Entity"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0032s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0026s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0029s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0024s
-INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
-DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /register Completado em 0.0118s
+INFO:mycode.logger:POST /register Completado em 0.0860s
 INFO:httpx:HTTP Request: POST http://testserver/register "HTTP/1.1 201 Created"
 DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /login Completado em 0.0035s
+INFO:mycode.logger:POST /login Completado em 0.0842s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login falhou com 
+INFO:mycode.logger:POST /login Completado em 0.0850s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 500 Internal Server Error"
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:POST /register Completado em 0.1139s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /register HTTP/1.1" 201 48
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:POST /login Completado em 0.1049s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /login HTTP/1.1" 200 48
+INFO:mycode.logger:GET /health Completado em 0.0013s
+INFO:mycode.logger:GET /v1/models Completado em 0.0005s
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:8000
+INFO:mycode.logger:POST /login falhou com 
+INFO:mycode.logger:POST /login Completado em 0.0963s
+DEBUG:urllib3.connectionpool:http://127.0.0.1:8000 "POST /login HTTP/1.1" 500 21
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0852s
+INFO:httpx:HTTP Request: POST http://testserver/register "HTTP/1.1 201 Created"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0856s
 INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
 DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:POST /tasks Completado em 0.0033s
-INFO:httpx:HTTP Request: POST http://testserver/tasks?user_id= "HTTP/1.1 422 Unprocessable Entity"
+INFO:mycode.logger:POST /login Completado em 0.0851s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
 DEBUG:asyncio:Using selector: EpollSelector
-INFO:mycode.logger:GET /tasks Completado em 0.0055s
-INFO:httpx:HTTP Request: GET http://testserver/tasks?user_id= "HTTP/1.1 422 Unprocessable Entity"
+INFO:mycode.logger:POST /login falhou com 
+INFO:mycode.logger:POST /login Completado em 0.0835s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 500 Internal Server Error"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login falhou com 
+INFO:mycode.logger:POST /login Completado em 0.0832s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 500 Internal Server Error"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0028s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0033s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0854s
+INFO:httpx:HTTP Request: POST http://testserver/register "HTTP/1.1 201 Created"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0826s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 200 OK"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login falhou com 
+INFO:mycode.logger:POST /login Completado em 0.0832s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 500 Internal Server Error"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /login Completado em 0.0026s
+INFO:httpx:HTTP Request: POST http://testserver/login "HTTP/1.1 401 Unauthorized"
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:mycode.logger:POST /register Completado em 0.0826s
+INFO:httpx:HTTP Request: POST http://testserver/register "HTTP/1.1 201 Created"
