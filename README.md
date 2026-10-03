@@ -23,9 +23,9 @@ Body (`UserIn`):
 {"username": "alice", "password": "secret"}
 ```
 
-- `201` -> `{"username": "alice", "id": 1}` (nunca retorna senha)
+- `201` -> `{"username": "alice", "id": 1}`
 - `409` -> username ou USERID já em uso
 - `422` -> username/senha inválidos
 
 Por enquanto `user_id` vem na request como query param. No futuro será extraído do JWT.
-Sem hash por enquanto (senha em texto puro). Ver `journal.md` / issue do Épico 5 para o plano de hash com bcrypt.
+
